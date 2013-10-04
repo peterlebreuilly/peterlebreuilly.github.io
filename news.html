@@ -1,0 +1,18 @@
+---
+layout: single
+title: Latest News
+id: news
+order: 2
+---
+<section class="article-summaries">
+{% for post in site.posts limit:3 %}
+<article>
+	<header>
+		<h3>{{ post.title }}</h3>
+		<small>by {{ post.author }} on {{ post.date | date_to_long_string }}</small>
+	</header>
+<p>{{ post.content | strip_html | truncatewords: 25 }}</p>
+<a class="more-link" href="{{ post.url }}">read more...</a>
+</article>
+{% endfor %}
+</section>

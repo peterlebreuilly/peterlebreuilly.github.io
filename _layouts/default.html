@@ -1,0 +1,53 @@
+{% include header.html %}
+
+<div class="row-fluid">
+		
+	<!-- Navigation -->
+	<nav class="span1 nav-sidebar">
+		<ul>
+			{% for order in site.page_order %}
+				{% if order == 'intro' %}
+					<li id="{{order}}-link"><a href="#{{order}}">Home</a></li>
+				{% endif %}
+				{% if order != 'intro' %}
+				<li id="{{order}}-link"><a href="#{{order}}">{{ order | capitalize }}</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
+	
+{% for order in site.page_order %}
+{% for page in site.pages %}
+{% if page.id == order %}
+	{% if page.id != "intro" %}
+	<section id="{{page.id}}" class="span10 pane">
+		<header>
+			<h2 class="offset2 pull-right page-header">{{ page.title }}</h2>
+		</header>
+	{% else %}
+	<section id="intro" class="span10 pane">
+		<header>
+			<h1 class="offset2 pull-right page-header">{{ page.title | upcase }}</h1>
+		</header>
+	{% endif %}
+		<div class="row-fluid">
+			<section class="container-fluid span8 offset2">
+					{{ page.content }}
+			</section>
+		</div>
+	<footer>
+		{% if page.id != "contact" %}
+		<a class="next-link"><i class="icon-double-angle-down icon-3x"></i></a>
+		{% endif %}
+		{% if page.id != "intro" %}
+		<a class="prev-link"><i class="icon-double-angle-up icon-3x"></i></a>
+		{% endif %}
+	</footer>
+	</section>
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+</div>
+
+{% include footer.html %}

@@ -1,0 +1,37 @@
+---
+title: Portfolio
+layout: single
+id: media
+order: 2
+---
+<section id="photos">
+<h2>Photographs</h2>
+<div id="galleries">
+    <a class="gallery span6" href="#"><img src="photos/DSC4875.jpg" /></a>
+    <div class="slides">
+        <a class="hide-gallery" href="#"><i class="icon-remove-circle icon-3x"></i></a>
+        <ul class="rs-slider">
+            {% for image in site.photos.images %}
+            <li><img src="photos/{{ image }}.jpg" /></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+</section>
+
+<section id="film">
+<h2>Film</h2>
+<video controls>
+    <source src="video/showreel.mp4"
+            type='video/mp4;
+            codecs="avc1.42E01E, mp4a.40.2"'
+            />
+</video>
+</section>
+
+<!--<section id="sound">
+<h2>Sound</h2>
+<div id="audio">
+
+</div>
+</section>-->

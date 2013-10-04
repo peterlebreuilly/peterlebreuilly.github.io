@@ -1,0 +1,37 @@
+body {
+  background: $whiteHoneydew;
+}
+
+#intro, #intro-link:hover {
+    @include background-image(linear-gradient($whiteSmoke, lighten($grayAsh,5%)));
+}
+
+#media, #media-link:hover {
+  @include background-image(linear-gradient(rgba($blueFrench,0.85), rgba(lighten($blueFrench,5%),0.85)), url("../img/willy(large).png"));
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  
+  &.darken {
+    @include background-image(linear-gradient(rgba(black,0.85), rgba(lighten(black,5%),0.85)), url("../img/willy(large).png"));
+  }
+}
+
+#news, #news-link:hover {
+  @include background-image(linear-gradient(rgba($yellowBuff,0.85), rgba(lighten($yellowBuff,5%),0.85)), url("../img/dad.png"));
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 25% 10%;
+}
+
+#about, #about-link:hover {
+  @include background-image(linear-gradient(rgba($red,0.85), rgba(lighten($red, 10%),0.85)), url("../img/stare(cropped).png"));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#contact, #contact-link:hover {
+  @include background-image(linear-gradient(rgba($greenFalls,0.85), rgba(lighten($greenGranada, 10%),0.85)), url("../img/stare(cropped).png"));
+  background-size: cover;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,21 @@
+{% include header.html %}
+<div class="row-fluid">
+		
+	<!-- Navigation -->
+	<nav class="span1 nav-sidebar">
+		<ul>
+			{% for order in site.page_order %}
+				{% if order == 'intro' %}
+					<li id="{{order}}-link"><a href="#{{order}}">Home</a></li>
+				{% endif %}
+				{% if order != 'intro' %}
+				<li id="{{order}}-link"><a href="#{{order}}">{{ order | capitalize }}</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
+	
+{{ content }}
+
+</div>
+{% include footer.html %}

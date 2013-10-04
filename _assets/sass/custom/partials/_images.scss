@@ -1,0 +1,46 @@
+a.gallery {
+      display: block;
+      padding: 0.5em;
+      margin-bottom: 1em;
+      
+     p {
+        color: $whiteSmoke;
+        font-size: 2em;
+      
+      &:hover {
+          color: $grayCharcoal;
+        }
+      }
+      
+      &:hover {
+        text-decoration: none;
+      }
+}
+    
+.slides {
+  display: none;
+  clear: both;
+}
+
+#media {
+        
+      img, video {
+        border: 1px solid $whiteSmoke;
+        @include box-shadow(3px 3px 6px $grayCharcoal);
+        
+      }
+}
+
+.slides {
+  
+    a {
+      display: inline-block;
+      margin: 0.75em;
+      color: $whiteSmoke;
+      
+      &:hover {
+        color: $grayCharcoal;
+        text-decoration: none;
+      }
+    }
+}

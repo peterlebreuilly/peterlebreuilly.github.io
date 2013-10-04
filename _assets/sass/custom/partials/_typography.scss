@@ -1,0 +1,93 @@
+h1, h2, h3 {
+  margin: 0;
+  font-family: HattoriHanzoLight;
+  color: $blueBreton;
+}
+
+h3 {
+  display: inline;
+}
+
+blockquote {
+  border: none;
+  font-size: $baseFontSize*5;
+  line-height: $baseFontSize*6;
+  text-align: center;
+  color: $grayCharcoal;
+  font-family: lane-narrowregular;
+  padding: 0;
+  
+  .alt-font {
+    font-size: 1.25em;
+    color: $blueFrench;
+    font-family: walkway_boldregular;
+  }
+}
+
+cite {
+  display: block;
+  text-align: center;
+  font-family: $sansFontFamily;
+  font-size: 1em;
+}
+
+p {
+  font-size: 1.5em;
+  line-height: 2em;
+  font-family: HattoriHanzoLight;
+}
+
+small {
+  font-style: italic;
+  padding-left: 0.5em;
+}
+
+
+.page-header {
+  margin: 1em 0;
+  font-size: 2.5em;
+  padding: 0;
+  border-color: $grayCadet;
+}
+
+#about h2, #about p {
+  color: $grayCadet;
+}
+
+#intro .page-header {
+  border: none;
+}
+
+.more-link {
+  float: right;
+  clear: both;
+  font-style: italic;
+  color: $blueBreton;
+ 
+  &:hover, &:active, &:visited {
+              text-decoration: none;
+              color: $blueFrench;
+            }
+}
+
+address {
+margin-top: 1em;
+font-size: 1.75em;
+line-height: 1.5em;
+font-family: HattoriHanzoLight;
+color: darken($whiteSmoke, 60%);
+
+    b {
+            color: $grayCharcoal;
+    }
+
+    a, a:link, a:visited {
+        display: block;
+        color: $whiteSmoke;
+
+        &:hover, &:active {
+            color: $grayCharcoal;
+            text-decoration: none;
+        }   
+      }
+}

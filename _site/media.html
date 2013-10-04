@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> - Portfolio</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+		<link rel="shortcut icon" href="ico/favicon.png">
+
+       <!-- <link rel="stylesheet" href="/css/normalize.css"> -->
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/refineslide.css">
+       <!-- <script src="/js/vendor/modernizr-2.6.2.min.js"></script> -->
+    </head>
+    <body class="">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+<div class="row-fluid">
+		
+	<!-- Navigation -->
+	<nav class="span1 nav-sidebar">
+		<ul>
+			
+		</ul>
+	</nav>
+	
+	
+	<section id="media" class="span10 pane">
+		<header>
+			<h2 class="offset2 pull-right page-header">Portfolio</h2>
+		</header>
+	
+		<div class="row-fluid">
+			<section class="container-fluid span8 offset2">
+				
+					<section id="photos">
+<h2>Photographs</h2>
+<!--<div id="galleries">
+	
+</div>-->
+<div id="galleries">
+    
+    <div class="slides">
+        <a class="hide-gallery" href="#"><i class="icon-remove-circle icon-3x"></i></a>
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+</section>
+
+<section id="films">
+<h2>Films</h2>
+<div id="player"></div>
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'EhT8AkCubRg',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+</section>
+
+<section id="sound">
+<h2>Sound</h2>
+<div id="audio">
+
+</div>
+</section>
+					
+			</section>
+		</div>
+	<footer>
+		
+		<a class="next-link" href=""><i class="icon-double-angle-down icon-3x"></i></a>
+		
+		
+		<a class="prev-link" href=""><i class="icon-double-angle-up icon-3x"></i></a>
+		
+	</footer>
+	</section>
+	
+</div>
+
+	<!-- Javascripts 
+	    ================================================= -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script>if (!window.jQuery) {document.write('<script src="/js/minified/jquery.min.js"><\/script>');}</script>
+	<script src="/js/minified/custom-ck.js"></script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+		// analytics code
+    </script>	
+	</body>
+</html>

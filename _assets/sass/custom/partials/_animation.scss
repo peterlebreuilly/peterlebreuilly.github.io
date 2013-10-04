@@ -1,0 +1,4 @@
+* {
+  @include transition-property('color', 'background-color', 'width');
+  @include transition-duration(0.5s);
+}
