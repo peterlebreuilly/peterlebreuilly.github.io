@@ -8,7 +8,7 @@
 			{% for order in site.page_order %}
 				{% if order == 'intro' %}
 					<li id="{{order}}-link"><a href="#{{order}}">Home</a></li>
-				{% endif %}
+         			{% endif %}
 				{% if order != 'intro' %}
 				<li id="{{order}}-link"><a href="#{{order}}">{{ order | capitalize }}</a></li>
 				{% endif %}
@@ -24,7 +24,7 @@
 	{% else %}
 	<section id="intro" class="span10 pane">
 		<header>
-			<h1 class="offset2 pull-right page-header">{{ page.title | upcase }}</h1>
+			<h1 class="offset2 page-header">{{ page.title | upcase }}</h1>
 		</header>
 	{% endif %}
 		<div class="row-fluid">
