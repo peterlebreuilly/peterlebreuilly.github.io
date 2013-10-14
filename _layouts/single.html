@@ -19,12 +19,12 @@
 	{% if page.id != "intro" %}
 	<section id="{{page.id}}" class="span10 pane">
 		<header>
-			<h2 class="offset2 pull-right page-header">{{ page.title }}</h2>
+			<h2 class="page-header">{{ page.title }}</h2>
 		</header>
 	{% else %}
 	<section id="intro" class="span10 pane">
 		<header>
-			<h1 class="offset2 page-header">{{ page.title | upcase }}</h1>
+			<h1 class="page-header">{{ page.title | upcase }}</h1>
 		</header>
 	{% endif %}
 		<div class="row-fluid">
