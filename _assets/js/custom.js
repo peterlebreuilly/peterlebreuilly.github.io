@@ -1,5 +1,5 @@
 jQuery(function($){
-	
+
 	// insert the correct pages
 	$('.page-holder').each(function(){
 		var pageId = $(this).attr('data-page-id');
@@ -29,8 +29,8 @@ jQuery(function($){
                             $('.rs-slider').refineSlide({
                                     maxWidth: 1000, // set to native image width (px)
                                     transition: 'fade'
-                            });
-                            
+                        });
+                        
                             $(".gallery").on('click', function(e){
                               var clicked = this;
                               var slides = $('.slides');
@@ -49,8 +49,18 @@ jQuery(function($){
                               });
                             });
                         }
- 
+                        
 		});
+                
 	});
+        
+//        setActive();
+//        
+//        $(".navmenu a").on('click', function(){
+//            setActive();
+//        });
+        
+        // scrollspy
+//        $("body").scrollspy();
 		
 });

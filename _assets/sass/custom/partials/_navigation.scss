@@ -1,43 +1,62 @@
 .nav-sidebar {
-  position: fixed;
-  left: 0;
-  top: 30%;
-  z-index: 10;
-  
-  ul {
-    list-style-type: none;
-    margin: 0;
-    
-    li {
-      font-size: $baseFontSize*1.25; 
-      line-height: $baseFontSize*4; // 56px
-      background: rgba($whiteAntiflash, 0.8);
-      @include border-radius(0 1em 1em 0);
-      @include box-shadow(2px 4px 10px $grayGunmetal);
-      padding: 0 10%;
-      margin: $baseFontSize/2 0;
-      width: 80%;
+    position: fixed;
+    left: 0;
+    top: 2%;
+    z-index: 10;
 
-      
-        &:hover {
-          width: 100%;
-          background: rgba($graySlate, 0.5);
-          @include box-shadow(1px 1px 2px $grayGunmetal);
-        }
-      
-        a {
+    ul {
+        list-style-type: none;
+        margin: 0;
+
+        li {
+            background: rgba($whiteAntiflash, 0.8);
+            @include border-radius(0 1em 1em 0);
+            @include box-shadow(2px 4px 10px $grayGunmetal);
+            width: 80%;
+            min-width: 2em;
+            min-height: 2em;
+            padding: 0.5em;
+            margin: 0.25em 0;
+            position: relative;
             display: block;
-            color: $blueBreton;
-            
-            &:hover {
-              text-decoration: none;
-              color: $whiteSmoke;
-              text-shadow: 0 -1px 1px darken($graySlate, 10%);
+
+            &:hover, &.active {
+              background: rgba($graySlate, 0.5);
+              @include box-shadow(1px 1px 2px $grayGunmetal);
+              width: 100%;
             }
+
+            /*
+                Hide the navigation text
+            */
+            .nav-text {
+                position: absolute;
+                left: -50000px;
+            }
+
+            a {
+                display: block;
+                color: $blueBreton;
+                text-align: center;
+
+                &:hover {
+                  text-decoration: none;
+                  color: $whiteSmoke;
+                  text-shadow: 0 -1px 1px darken($graySlate, 10%);
+                }
+
+                i {
+                    padding-left: 0 0.25em;
+                }
             
+            }
+
         }
     }
-  }
+}
+
+.nav > li > a:hover {
+    background: none;
 }
 
 .next-link:hover, .prev-link:hover {

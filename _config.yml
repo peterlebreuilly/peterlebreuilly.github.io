@@ -4,6 +4,11 @@ url: peterlebreuilly.dev
 paginate: 10 # pagination basted on number of posts
 exclude: ["README.md", 'sass', 'public', ".project", "config.rb", "codekit-config.json"] # files to exclude
 
-page_order: ['intro', 'about', 'media', 'contact'] 
+page_order: ['intro', 'about', 'media', 'contact']
+page_icon:
+  intro: 'home'
+  about: 'info'
+  media: 'play-circle'
+  contact: 'envelope'
 photos:
     images: ["DSC4833", "DSC4856", "DSC4866", "DSC4871", "DSC4875", "DSC4882", "DSC4895-1", "DSC4897", "27db0414290681c5a0dff696f2fcf7e2"]

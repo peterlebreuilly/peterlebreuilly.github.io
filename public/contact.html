@@ -11,18 +11,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-		<link rel="shortcut icon" href="ico/favicon.png">
+
 
        <!-- <link rel="stylesheet" href="/css/normalize.css"> -->
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/refineslide.css">
        <!-- <script src="/js/vendor/modernizr-2.6.2.min.js"></script> -->
     </head>
-    <body class="">
+    <body class="" data-spy="scroll" data-target=".nav-sidebar">
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -43,11 +39,6 @@
 				
 				
 				<li id="about-link"><a href="#about">About</a></li>
-				
-			
-				
-				
-				<li id="news-link"><a href="#news">News</a></li>
 				
 			
 				
@@ -95,8 +86,6 @@ performance</blockquote>
 		
 	</footer>
 	</section>
-
-
 
 
 
@@ -155,56 +144,6 @@ performance</blockquote>
 
 
 
-
-
-
-
-	
-	<section id="news" class="span10 pane">
-		<header>
-			<h2 class="offset2 pull-right page-header">Latest News</h2>
-		</header>
-	
-		<div class="row-fluid">
-			<section class="container-fluid span8 offset2">
-					<section class="article-summaries">
-{% for post in site.posts limit:3 %}
-<article>
-	<header>
-		<h3>{{ post.title }}</h3>
-		<small>by {{ post.author }} on {{ post.date | date_to_long_string }}</small>
-	</header>
-<p>{{ post.content | strip_html | truncatewords: 25 }}</p>
-<a class="more-link" href="{{ post.url }}">read more...</a>
-</article>
-{% endfor %}
-</section>
-			</section>
-		</div>
-	<footer>
-		
-		<a class="next-link"><i class="icon-double-angle-down icon-3x"></i></a>
-		
-		
-		<a class="prev-link"><i class="icon-double-angle-up icon-3x"></i></a>
-		
-	</footer>
-	</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	<section id="media" class="span10 pane">
 		<header>
@@ -216,7 +155,7 @@ performance</blockquote>
 					<section id="photos">
 <h2>Photographs</h2>
 <div id="galleries">
-    <a class="gallery span6" href="#"><img src="photos/DSC4875.jpg" /></a>
+    <a class="gallery span6" href="#"><img src="photos/DSC4875.jpg" /><p>Click Image For Gallery</p></a>
     <div class="slides">
         <a class="hide-gallery" href="#"><i class="icon-remove-circle icon-3x"></i></a>
         <ul class="rs-slider">
@@ -264,8 +203,6 @@ performance</blockquote>
 
 
 
-
-
 	
 	<section id="contact" class="span10 pane">
 		<header>
@@ -274,8 +211,7 @@ performance</blockquote>
 	
 		<div class="row-fluid">
 			<section class="container-fluid span8 offset2">
-					<h2 id='agent'>Agent</h2>
-<address class='vcard'>
+					<address class='vcard'>
 <div class='fn org'><b>Clic Agency</b></div>
 <div class='adr'>
 <div class='steet-address'>7 Ffordd Seion,</div>
@@ -283,8 +219,8 @@ performance</blockquote>
 <div class='region'>Gwynedd</div> 
 <div class='postal-code'>LL57 1BS</div>
 <div class='tel'>01248 354420</div>
-<a class='email' href='mailto:clic@btinternet.com'>clic@btinternet.com</a>
-<a class='url' href='http://www.clicagency.co.uk'>www.clicagency.co.uk</a>
+<a href='mailto:clic@btinternet.com' class='email'>clic@btinternet.com</a>
+<a href='http://www.clicagency.co.uk' class='url'>www.clicagency.co.uk</a>
 </div>
 </address>
 			</section>
@@ -296,8 +232,6 @@ performance</blockquote>
 		
 	</footer>
 	</section>
-
-
 
 
 

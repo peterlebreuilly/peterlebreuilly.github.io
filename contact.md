@@ -4,8 +4,6 @@ title: Contact
 id: contact
 order: 4
 ---
-##Agent
-
 <address class="vcard">
 <div class="fn org"><b>Clic Agency</b></div>
 <div class="adr">

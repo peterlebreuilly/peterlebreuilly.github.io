@@ -9148,65 +9148,69 @@ html {
 /* line 5, ../_assets/sass/custom/partials/_layout.scss */
 body {
   height: 100%; }
+  @media (max-width: 767px) {
+    /* line 5, ../_assets/sass/custom/partials/_layout.scss */
+    body {
+      padding: 0; } }
 
-/* line 9, ../_assets/sass/custom/partials/_layout.scss */
+/* line 13, ../_assets/sass/custom/partials/_layout.scss */
 header, footer, article {
   overflow: auto; }
 
-/* line 13, ../_assets/sass/custom/partials/_layout.scss */
+/* line 17, ../_assets/sass/custom/partials/_layout.scss */
 section {
   position: relative; }
 
-/* line 17, ../_assets/sass/custom/partials/_layout.scss */
+/* line 21, ../_assets/sass/custom/partials/_layout.scss */
 footer {
   bottom: 0;
   right: 1%;
   position: absolute; }
-  /* line 22, ../_assets/sass/custom/partials/_layout.scss */
+  /* line 26, ../_assets/sass/custom/partials/_layout.scss */
   footer a {
     display: inline-block;
     text-align: center;
     color: #dbd7d2; }
 
-/* line 29, ../_assets/sass/custom/partials/_layout.scss */
+/* line 33, ../_assets/sass/custom/partials/_layout.scss */
 article {
   padding-bottom: 1em; }
 
-/* line 33, ../_assets/sass/custom/partials/_layout.scss */
+/* line 37, ../_assets/sass/custom/partials/_layout.scss */
 article header {
   border-bottom: 1px solid #91a3b0; }
 
-/* line 37, ../_assets/sass/custom/partials/_layout.scss */
+/* line 41, ../_assets/sass/custom/partials/_layout.scss */
 article p {
   padding: 1em; }
 
-/* line 41, ../_assets/sass/custom/partials/_layout.scss */
+/* line 45, ../_assets/sass/custom/partials/_layout.scss */
 .row-fluid {
   height: inherit;
   padding-bottom: 1em; }
 
-/* line 46, ../_assets/sass/custom/partials/_layout.scss */
+/* line 50, ../_assets/sass/custom/partials/_layout.scss */
 .page-holder {
   overflow: visible;
-  height: 95%; }
+  min-height: 95%; }
 
-/* line 51, ../_assets/sass/custom/partials/_layout.scss */
+/* line 55, ../_assets/sass/custom/partials/_layout.scss */
 .row-fluid .pane {
   width: 100%;
   min-height: 100%;
   margin-left: 0;
   padding: 1em 2.12766%; }
-  /* line 57, ../_assets/sass/custom/partials/_layout.scss */
+  /* line 61, ../_assets/sass/custom/partials/_layout.scss */
   .row-fluid .pane .row-fluid {
     height: 100%;
     padding-bottom: 0; }
 
-/* line 64, ../_assets/sass/custom/partials/_layout.scss */
+/* line 68, ../_assets/sass/custom/partials/_layout.scss */
 #photos, #film, #sound {
   clear: both;
   overflow: auto; }
 
-/* line 69, ../_assets/sass/custom/partials/_layout.scss */
+/* line 73, ../_assets/sass/custom/partials/_layout.scss */
 #film {
   margin: 2em 0; }
 
@@ -9214,7 +9218,7 @@ article p {
 .nav-sidebar {
   position: fixed;
   left: 0;
-  top: 30%;
+  top: 2%;
   z-index: 10; }
   /* line 7, ../_assets/sass/custom/partials/_navigation.scss */
   .nav-sidebar ul {
@@ -9222,8 +9226,6 @@ article p {
     margin: 0; }
     /* line 11, ../_assets/sass/custom/partials/_navigation.scss */
     .nav-sidebar ul li {
-      font-size: 17.5px;
-      line-height: 56px;
       background: rgba(242, 243, 244, 0.8);
       -webkit-border-radius: 0 1em 1em 0;
       -moz-border-radius: 0 1em 1em 0;
@@ -9231,27 +9233,46 @@ article p {
       -webkit-box-shadow: 2px 4px 10px #423732;
       -moz-box-shadow: 2px 4px 10px #423732;
       box-shadow: 2px 4px 10px #423732;
-      padding: 0 10%;
-      margin: 7px 0;
-      width: 80%; }
-      /* line 22, ../_assets/sass/custom/partials/_navigation.scss */
-      .nav-sidebar ul li:hover {
-        width: 100%;
+      width: 80%;
+      min-width: 2em;
+      min-height: 2em;
+      padding: 0.5em;
+      margin: 0.25em 0;
+      position: relative;
+      display: block;
+      /*
+          Hide the navigation text
+      */ }
+      /* line 23, ../_assets/sass/custom/partials/_navigation.scss */
+      .nav-sidebar ul li:hover, .nav-sidebar ul li.active {
         background: rgba(112, 128, 144, 0.5);
         -webkit-box-shadow: 1px 1px 2px #423732;
         -moz-box-shadow: 1px 1px 2px #423732;
-        box-shadow: 1px 1px 2px #423732; }
-      /* line 28, ../_assets/sass/custom/partials/_navigation.scss */
+        box-shadow: 1px 1px 2px #423732;
+        width: 100%; }
+      /* line 32, ../_assets/sass/custom/partials/_navigation.scss */
+      .nav-sidebar ul li .nav-text {
+        position: absolute;
+        left: -50000px; }
+      /* line 37, ../_assets/sass/custom/partials/_navigation.scss */
       .nav-sidebar ul li a {
         display: block;
-        color: #4d5965; }
-        /* line 32, ../_assets/sass/custom/partials/_navigation.scss */
+        color: #4d5965;
+        text-align: center; }
+        /* line 42, ../_assets/sass/custom/partials/_navigation.scss */
         .nav-sidebar ul li a:hover {
           text-decoration: none;
           color: whitesmoke;
           text-shadow: 0 -1px 1px #5a6673; }
+        /* line 48, ../_assets/sass/custom/partials/_navigation.scss */
+        .nav-sidebar ul li a i {
+          padding-left: 0 0.25em; }
 
-/* line 43, ../_assets/sass/custom/partials/_navigation.scss */
+/* line 58, ../_assets/sass/custom/partials/_navigation.scss */
+.nav > li > a:hover {
+  background: none; }
+
+/* line 62, ../_assets/sass/custom/partials/_navigation.scss */
 .next-link:hover, .prev-link:hover {
   text-decoration: none;
   color: #36454f; }
@@ -9264,7 +9285,7 @@ a.gallery {
   /* line 6, ../_assets/sass/custom/partials/_images.scss */
   a.gallery p {
     color: whitesmoke;
-    font-size: 2em; }
+    font-size: 1.2em; }
     /* line 10, ../_assets/sass/custom/partials/_images.scss */
     a.gallery p:hover {
       color: #36454f; }

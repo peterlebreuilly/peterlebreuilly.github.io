@@ -1,6 +1,840 @@
+/*
+ * jQuery RefineSlide plugin v0.4.1
+ * http://github.com/alexdunphy/refineslide
+ * Requires: jQuery v1.8+
+ * MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
+
+ ;(function ($, window, document) {
+    'use strict';
+
+	// Baked-in settings for extension
+	var defaults = {
+        maxWidth              : 800,      // Max slider width - should be set to image width
+        transition            : 'cubeV',  // String (default 'cubeV'): Transition type ('custom', random', 'cubeH', 'cubeV', 'fade', 'sliceH', 'sliceV', 'slideH', 'slideV', 'scale', 'blockScale', 'kaleidoscope', 'fan', 'blindH', 'blindV')
+        customTransitions     : [],
+        fallback3d            : 'sliceV', // String (default 'sliceV'): Fallback for browsers that support transitions, but not 3d transforms (only used if primary transition makes use of 3d-transforms)
+        perspective           : 1000,     // Perspective (used for 3d transforms)
+        useThumbs             : true,     // Bool (default true): Navigation type thumbnails
+        useArrows             : false,    // Bool (default false): Navigation type previous and next arrows
+        thumbMargin           : 3,        // Int (default 3): Percentage width of thumb margin
+        autoPlay              : false,    // Int (default false): Auto-cycle slider
+        delay                 : 5000,     // Int (default 5000) Time between slides in ms
+        transitionDuration    : 800,      // Int (default 800): Transition length in ms
+        startSlide            : 0,        // Int (default 0): First slide
+        keyNav                : true,     // Bool (default true): Use left/right arrow keys to switch slide
+        captionWidth          : 50,       // Int (default 50): Percentage of slide taken by caption
+        arrowTemplate         : '<div class="rs-arrows"><a href="#" class="rs-prev"></a><a href="#" class="rs-next"></a></div>', // String: The markup used for arrow controls (if arrows are used). Must use classes '.rs-next' & '.rs-prev'
+        onInit                : function () {}, // Func: User-defined, fires with slider initialisation
+        onChange              : function () {}, // Func: User-defined, fires with transition start
+        afterChange           : function () {}  // Func: User-defined, fires after transition end
+	};
+
+	// RS (RefineSlide) object constructor
+	function RS(elem, settings) {
+		this.$slider            = $(elem).addClass('rs-slider');      // Elem: Slider element
+		this.settings           = $.extend({}, defaults, settings);    // Obj: Merged user settings/defaults
+		this.$slides            = this.$slider.find('> li');           // Elem Arr: Slide elements
+		this.totalSlides        = this.$slides.length;                 // Int: Number of slides
+		this.cssTransitions     = testBrowser.cssTransitions();        // Bool: Test for CSS transition support
+		this.cssTransforms3d    = testBrowser.cssTransforms3d();       // Bool: Test for 3D transform support
+		this.currentPlace       = this.settings.startSlide;         // Int: Index of current slide (starts at 0)
+		this.$currentSlide      = this.$slides.eq(this.currentPlace);  // Elem: Starting slide
+		this.inProgress         = false;                               // Bool: Prevents overlapping transitions
+		this.$sliderWrap        = this.$slider.wrap('<div class="rs-wrap" />').parent();      // Elem: Slider wrapper div
+		this.$sliderBG          = this.$slider.wrap('<div class="rs-slide-bg" />').parent();  // Elem: Slider background (useful for styling & essential for cube transitions)
+		this.settings.slider = this;  // Make slider object accessible to client call code with 'this.slider' (there's probably a better way to do this)
+
+		this.init();
+	}
+
+	RS.prototype = {
+        cycling: null,
+        $slideImages: null,
+
+        init: function () {
+            // User-defined function to fire on slider initialisation
+            this.settings.onInit();
+
+            // Setup captions
+            this.captions();
+
+            if(this.settings.transition === 'custom') {
+                this.nextAnimIndex = -1; // Set animation index for custom animation
+            }
+
+            if (this.settings.useArrows) {
+                this.setArrows(); // Setup arrow navigation
+            }
+
+            if (this.settings.keyNav) {
+                this.setKeys(); // Setup keyboard navigation
+            }
+
+            for (var i = 0; i < this.totalSlides; i++) { // Add slide identifying classes
+                this.$slides.eq(i).addClass('rs-slide-' + i);
+            }
+
+            if (this.settings.autoPlay) {
+                this.setAutoPlay();
+
+                // Listen for slider mouseover
+                this.$slider.on({
+                    mouseenter: $.proxy(function () {
+                        if (this.cycling !== null) {
+                            clearTimeout(this.cycling);
+                        }
+                    }, this),
+                    mouseleave: $.proxy(this.setAutoPlay, this) // Resume slideshow
+                });
+            }
+
+            // Get the first image in each slide <li>
+            this.$slideImages = this.$slides.find('img:eq(0)').addClass('rs-slide-image');
+
+            this.setup();
+        }
+
+        ,setup: function () {
+            this.$sliderWrap.css('width', this.settings.maxWidth);
+
+            if (this.settings.useThumbs) {
+                this.setThumbs();
+            }
+
+            // Display first slide
+            this.$currentSlide.css({'opacity' : 1, 'z-index' : 2});
+        }
+
+        ,setArrows:function () {
+            var that = this;
+
+            // Append user-defined arrow template (elems) to '.rs-wrap' elem
+            this.$sliderWrap.append(this.settings.arrowTemplate);
+
+            // Fire next() method when clicked
+            $('.rs-next', this.$sliderWrap).on('click', function (e) {
+                e.preventDefault();
+                that.next();
+            });
+
+            // Fire prev() method when clicked
+            $('.rs-prev', this.$sliderWrap).on('click', function (e) {
+                e.preventDefault();
+                that.prev();
+            });
+        }
+
+        ,next: function () {
+            if (this.settings.transition === 'custom') {
+                this.nextAnimIndex++;
+            }
+
+            // If on final slide, loop back to first slide
+            if (this.currentPlace === this.totalSlides - 1) {
+                this.transition(0, true); // Call transition
+            } else {
+                this.transition(this.currentPlace + 1, true); // Call transition
+            }
+        }
+
+        ,prev: function () {
+            if (this.settings.transition === 'custom') {
+                this.nextAnimIndex--;
+            }
+
+            // If on first slide, loop round to final slide
+            if (this.currentPlace == 0) {
+                this.transition(this.totalSlides - 1, false); // Call transition
+            } else {
+                this.transition(this.currentPlace - 1, false); // Call transition
+            }
+        }
+
+        ,setKeys: function () {
+            var that = this;
+
+            // Bind keyboard left/right arrows to next/prev methods
+            $(document).on('keydown', function (e) {
+                if (e.keyCode === 39) { // Right arrow key
+                    that.next();
+                } else if (e.keyCode === 37) { // Left arrow key
+                    that.prev();
+                }
+            });
+        }
+
+        ,setAutoPlay: function () {
+            var that = this;
+
+            // Set timeout to object property so it can be accessed/cleared externally
+            this.cycling = setTimeout(function () {
+                that.next();
+            }, this.settings.delay);
+        }
+
+        ,setThumbs: function () {
+            var that = this,
+                // Set percentage width (minus user-defined margin) to span width of slider
+                width = (100 - ((this.totalSlides - 1) * this.settings.thumbMargin)) / this.totalSlides + '%';
+
+            //<Wrapper to contain thumbnails
+            this.$thumbWrap = $('<div class="rs-thumb-wrap" />').appendTo(this.$sliderWrap);
+
+            // Loop to apply thumbnail widths/margins to <a> wraps, appending an image clone to each
+            for (var i = 0; i < this.totalSlides; i++) {
+                var $thumb = $('<a />')
+                    .css({
+                        width : width,
+                        marginLeft : this.settings.thumbMargin + '%'
+                    })
+                    .attr('href', '#')
+                    .data('rs-num', i);
+
+                this.$slideImages.eq(i).clone()
+                    .removeAttr('style')
+                    .appendTo(this.$thumbWrap)
+                    .wrap($thumb);
+            }
+
+            this.$thumbWrapLinks = this.$thumbWrap.find('a');
+
+            // Safety margin to stop IE7 wrapping the thumbnails (no visual effect in other browsers)
+            this.$thumbWrap.children().last().css('margin-right', -10);
+
+            // Add active class to starting slide's respective thumb
+            this.$thumbWrapLinks.eq(this.settings.startSlide).addClass('active');
+
+            // Listen for click events on thumnails
+            this.$thumbWrap.on('click', 'a', function (e) {
+                e.preventDefault();
+
+                that.transition(parseInt($(this).data('rs-num'))); // Call transition using identifier from thumb class
+            });
+        }
+
+        ,captions: function() {
+            var that = this,
+                $captions = this.$slides.find('.rs-caption');
+
+            // User-defined caption width
+            $captions.css({
+                width: that.settings.captionWidth + '%',
+                opacity: 0
+            });
+
+            // Display starting slide's caption
+            this.$currentSlide.find('.rs-caption').css('opacity', 1);
+
+            $captions.each(function() {
+                $(this).css({
+                    transition: 'opacity ' + that.settings.transitionDuration + 'ms linear',
+                    backfaceVisibility: 'hidden'
+                });
+            });
+        }
+
+        ,transition: function (slideNum, forward) {
+            // If inProgress flag is not set (i.e. if not mid-transition)
+            if (!this.inProgress) {
+                // If not already on requested slide
+                if (slideNum !== this.currentPlace) {
+                    // Check whether the requested slide index is ahead or behind in the array (if not passed in as param)
+                    if (typeof forward === 'undefined') {
+                    	forward = slideNum > this.currentPlace ? true : false;
+                    }
+
+                    // If thumbnails exist, revise active class states
+                    if (this.settings.useThumbs) {
+                        this.$thumbWrapLinks.eq(this.currentPlace).removeClass('active');
+                        this.$thumbWrapLinks.eq(slideNum).addClass('active');
+                    }
+
+                    // Assign next slide prop (elem)
+                    this.$nextSlide = this.$slides.eq(slideNum);
+
+                    // Assign next slide index prop (int)
+                    this.currentPlace = slideNum;
+
+                    // User-defined function, fires with transition
+                    this.settings.onChange();
+
+                    // Instantiate new Transition object, passing in self (RS obj), transition type (string), direction (bool)
+                    new Transition(this, this.settings.transition, forward);
+                }
+            }
+        }
+    };
+
+	// Transition object constructor
+	function Transition(RS, transition, forward) {
+		this.RS = RS; // RS (RefineSlide) object
+		this.RS.inProgress = true; // Set RS inProgress flag to prevent additional Transition objects being instantiated until transition end
+		this.forward = forward; // Bool: true for forward, false for backward
+		this.transition = transition; // String: name of transition requested
+
+        if (this.transition === 'custom') {
+            this.customAnims = this.RS.settings.customTransitions;
+            this.isCustomTransition = true;
+        }
+
+        // Remove incorrect specified elements from customAnims array.
+        if (this.transition === 'custom') {
+            var that = this;
+            $.each(this.customAnims, function (i, obj) {
+                if ($.inArray(obj, that.anims) === -1) {
+                    that.customAnims.splice(i, 1);
+                }
+            });
+        }
+
+        this.fallback3d = this.RS.settings.fallback3d; // String: fallback to use when 3D transforms aren't supported
+
+		this.init(); // Call Transition initialisation method
+	}
+
+	// Transition object Prototype
+	Transition.prototype = {
+        // Fallback to use if CSS transitions are unsupported
+        fallback: 'fade'
+
+        // Array of possible animations
+        ,anims: ['cubeH', 'cubeV', 'fade', 'sliceH', 'sliceV', 'slideH', 'slideV', 'scale', 'blockScale', 'kaleidoscope', 'fan', 'blindH', 'blindV']
+
+        ,customAnims: []
+
+        ,init: function () {
+            // Call requested transition method
+            this[this.transition]();
+        }
+
+        ,before: function (callback) {
+            var that = this;
+
+            // Prepare slide opacity & z-index
+            this.RS.$currentSlide.css('z-index', 2);
+            this.RS.$nextSlide.css({'opacity' : 1, 'z-index' : 1});
+
+            // Fade out/in captions with CSS/JS depending on browser capability
+            if (this.RS.cssTransitions) {
+                this.RS.$currentSlide.find('.rs-caption').css('opacity', 0);
+                this.RS.$nextSlide.find('.rs-caption').css('opacity', 1);
+            } else {
+                this.RS.$currentSlide.find('.rs-caption').animate({'opacity' : 0}, that.RS.settings.transitionDuration);
+                this.RS.$nextSlide.find('.rs-caption').animate({'opacity' : 1}, that.RS.settings.transitionDuration);
+            }
+
+            // Check if transition describes a setup method
+            if (typeof this.setup === 'function') {
+                // Setup required by transition
+                var transition = this.setup();
+
+                setTimeout(function () {
+                    callback(transition);
+                }, 20);
+            } else {
+                // Transition execution
+                this.execute();
+            }
+
+            // Listen for CSS transition end on elem (set by transition)
+            if (this.RS.cssTransitions) {
+                $(this.listenTo).one('webkitTransitionEnd transitionend otransitionend oTransitionEnd mstransitionend', $.proxy(this.after, this));
+            }
+        }
+
+        ,after: function () {
+            // Reset transition CSS
+            this.RS.$sliderBG.removeAttr('style');
+            this.RS.$slider.removeAttr('style');
+            this.RS.$currentSlide.removeAttr('style');
+            this.RS.$nextSlide.removeAttr('style');
+            this.RS.$currentSlide.css({
+                zIndex: 1,
+                opacity: 0
+            });
+            this.RS.$nextSlide.css({
+                zIndex: 2,
+                opacity : 1
+            });
+
+            // Additional reset steps required by transition (if any exist)
+            if (typeof this.reset === 'function') {
+                this.reset();
+            }
+
+            // If slideshow is active, reset the timeout
+            if (this.RS.settings.autoPlay) {
+                clearTimeout(this.RS.cycling);
+                this.RS.setAutoPlay();
+            }
+
+            // Assign new slide position
+            this.RS.$currentSlide = this.RS.$nextSlide;
+
+            // Remove RS obj inProgress flag (i.e. allow new Transition to be instantiated)
+            this.RS.inProgress = false;
+
+            // User-defined function, fires after transition has ended
+            this.RS.settings.afterChange();
+        }
+
+        ,fade: function () {
+            var that = this;
+
+            // If CSS transitions are supported by browser
+            if (this.RS.cssTransitions) {
+                // Setup steps
+                this.setup = function () {
+                    // Set event listener to next slide elem
+                    that.listenTo = that.RS.$currentSlide;
+
+                    that.RS.$currentSlide.css('transition', 'opacity ' + that.RS.settings.transitionDuration + 'ms linear');
+                };
+
+                // Execution steps
+                this.execute = function () {
+                    // Display next slide over current slide
+                    that.RS.$currentSlide.css('opacity', 0);
+                }
+            } else { // JS animation fallback
+                this.execute = function () {
+                    that.RS.$currentSlide.animate({'opacity' : 0}, that.RS.settings.transitionDuration, function () {
+                        // Reset steps
+                        that.after();
+                    });
+                }
+            }
+
+            this.before($.proxy(this.execute, this));
+        }
+
+        // cube() method is used by cubeH() & cubeV() - not for calling directly
+        ,cube: function (tz, ntx, nty, nrx, nry, wrx, wry) { // Args: translateZ, (next slide) translateX, (next slide) translateY, (next slide) rotateX, (next slide) rotateY, (wrap) rotateX, (wrap) rotateY
+            // Fallback if browser does not support 3d transforms/CSS transitions
+            if (!this.RS.cssTransitions || !this.RS.cssTransforms3d) {
+                return this[this['fallback3d']](); // User-defined transition
+            }
+
+            var that = this;
+
+            // Setup steps
+            this.setup = function () {
+                // Set event listener to '.rs-slider' <ul>
+                that.listenTo = that.RS.$slider;
+
+                this.RS.$sliderBG.css('perspective', 1000);
+
+                // props for slide <li>s
+                that.RS.$currentSlide.css({
+                    transform : 'translateZ(' + tz + 'px)',
+                    backfaceVisibility : 'hidden'
+                });
+
+                // props for next slide <li>
+                that.RS.$nextSlide.css({
+                    opacity : 1,
+                    backfaceVisibility : 'hidden',
+                    transform : 'translateY(' + nty + 'px) translateX(' + ntx + 'px) rotateY('+ nry +'deg) rotateX('+ nrx +'deg)'
+                });
+
+                // props for slider <ul>
+                that.RS.$slider.css({
+                    transform: 'translateZ(-' + tz + 'px)',
+                    transformStyle: 'preserve-3d'
+                });
+            };
+
+            // Execution steps
+            this.execute = function () {
+                that.RS.$slider.css({
+                    transition: 'all ' + that.RS.settings.transitionDuration + 'ms ease-in-out',
+                    transform: 'translateZ(-' + tz + 'px) rotateX('+ wrx +'deg) rotateY('+ wry +'deg)'
+                });
+            };
+
+            this.before($.proxy(this.execute, this));
+        }
+
+        ,cubeH: function () {
+            // Set to half of slide width
+            var dimension = $(this.RS.$slides).width() / 2;
+
+            // If next slide is ahead in array
+            if (this.forward) {
+                this.cube(dimension, dimension, 0, 0, 90, 0, -90);
+            } else {
+                this.cube(dimension, -dimension, 0, 0, -90, 0, 90);
+            }
+        }
+
+        ,cubeV: function () {
+            // Set to half of slide height
+            var dimension = $(this.RS.$slides).height() / 2;
+
+            // If next slide is ahead in array
+            if (this.forward) {
+                this.cube(dimension, 0, -dimension, 90, 0, -90, 0);
+            } else {
+                this.cube(dimension, 0, dimension, -90, 0, 90, 0);
+            }
+        }
+
+        // grid() method is used by many transitions - not for calling directly
+        // Grid calculations are based on those in the awesome flux slider (joelambert.co.uk/flux)
+        ,grid: function (cols, rows, ro, tx, ty, sc, op) { // Args: columns, rows, rotate, translateX, translateY, scale, opacity
+            // Fallback if browser does not support CSS transitions
+            if (!this.RS.cssTransitions) {
+                return this[this['fallback']]();
+            }
+
+            var that = this;
+
+            // Setup steps
+            this.setup = function () {
+                // The time (in ms) added to/subtracted from the delay total for each new gridlet
+                var count = (that.RS.settings.transitionDuration) / (cols + rows);
+
+                // Gridlet creator (divisions of the image grid, positioned with background-images to replicate the look of an entire slide image when assembled)
+                function gridlet(width, height, top, left, src, imgWidth, imgHeight, c, r) {
+                    var delay = (c + r) * count;
+
+                    // Return a gridlet elem with styles for specific transition
+                    return $('<div class="rs-gridlet" />').css({
+                        width : width,
+                        height : height,
+                        top : top,
+                        left : left,
+                        backgroundImage : 'url(' + src + ')',
+                        backgroundPosition : '-' + left + 'px -' + top + 'px',
+                        backgroundSize : imgWidth + 'px ' + imgHeight + 'px',
+                        transition : 'all ' + that.RS.settings.transitionDuration + 'ms ease-in-out ' + delay + 'ms',
+                        transform : 'none'
+                    });
+                }
+
+                // Get the next slide's image
+                that.$img = that.RS.$currentSlide.find('img.rs-slide-image');
+
+                // Create a grid to hold the gridlets
+                that.$grid = $('<div />').addClass('rs-grid');
+
+                // Prepend the grid to the next slide (i.e. so it's above the slide image)
+                that.RS.$currentSlide.prepend(that.$grid);
+
+                // vars to calculate positioning/size of gridlets
+                var imgWidth = that.$img.width(),
+                    imgHeight = that.$img.height(),
+                    imgSrc = that.$img.attr('src'),
+                    colWidth = Math.floor(imgWidth / cols),
+                    rowHeight = Math.floor(imgHeight / rows),
+                    colRemainder = imgWidth - (cols * colWidth),
+                    colAdd = Math.ceil(colRemainder / cols),
+                    rowRemainder = imgHeight - (rows * rowHeight),
+                    rowAdd = Math.ceil(rowRemainder / rows),
+                    leftDist = 0;
+
+                // tx/ty args can be passed as 'auto'/'min-auto' (meaning use slide width/height or negative slide width/height)
+                tx = tx === 'auto' ? imgWidth : tx;
+                tx = tx === 'min-auto' ? - imgWidth : tx;
+                ty = ty === 'auto' ? imgHeight : ty;
+                ty = ty === 'min-auto' ? - imgHeight : ty;
+
+                // Loop through cols
+                for (var i = 0; i < cols; i++) {
+                    var topDist = 0,
+                        newColWidth = colWidth;
+
+                    // If imgWidth (px) does not divide cleanly into the specified number of cols, adjust individual col widths to create correct total
+                    if (colRemainder > 0) {
+                        var add = colRemainder >= colAdd ? colAdd : colRemainder;
+                        newColWidth += add;
+                        colRemainder -= add;
+                    }
+
+                    // Nested loop to create row gridlets for each col
+                    for (var j = 0; j < rows; j++)  {
+                        var newRowHeight = rowHeight,
+                            newRowRemainder = rowRemainder;
+
+                        // If imgHeight (px) does not divide cleanly into the specified number of rows, adjust individual row heights to create correct total
+                        if (newRowRemainder > 0) {
+                            add = newRowRemainder >= rowAdd ? rowAdd : rowRemainder;
+                            newRowHeight += add;
+                            newRowRemainder -= add;
+                        }
+
+                        // Create & append gridlet to grid
+                        that.$grid.append(gridlet(newColWidth, newRowHeight, topDist, leftDist, imgSrc, imgWidth, imgHeight, i, j));
+
+                        topDist += newRowHeight;
+                    }
+
+                    leftDist += newColWidth;
+                }
+
+                // Set event listener on last gridlet to finish transitioning
+                that.listenTo = that.$grid.children().last();
+
+                // Show grid & hide the image it replaces
+                that.$grid.show();
+                that.$img.css('opacity', 0);
+
+                // Add identifying classes to corner gridlets (useful if applying border radius)
+                that.$grid.children().first().addClass('rs-top-left');
+                that.$grid.children().last().addClass('rs-bottom-right');
+                that.$grid.children().eq(rows - 1).addClass('rs-bottom-left');
+                that.$grid.children().eq(- rows).addClass('rs-top-right');
+            };
+
+            // Execution steps
+            this.execute = function () {
+                that.$grid.children().css({
+                    opacity: op,
+                    transform: 'rotate('+ ro +'deg) translateX('+ tx +'px) translateY('+ ty +'px) scale('+ sc +')'
+                });
+            };
+
+            this.before($.proxy(this.execute, this));
+
+            // Reset steps
+            this.reset = function () {
+                that.$img.css('opacity', 1);
+                that.$grid.remove();
+            }
+        }
+
+        ,sliceH: function () {
+            this.grid(1, 8, 0, 'min-auto', 0, 1, 0);
+        }
+
+        ,sliceV: function () {
+            this.grid(10, 1, 0, 0, 'auto', 1, 0);
+        }
+
+        ,slideV: function () {
+            var dir = this.forward ?
+                'min-auto' :
+                'auto';
+
+            this.grid(1, 1, 0, 0, dir, 1, 1);
+        }
+
+        ,slideH: function () {
+            var dir = this.forward ?
+                'min-auto' :
+                'auto';
+
+            this.grid(1, 1, 0, dir, 0, 1, 1);
+        }
+
+        ,scale: function () {
+            this.grid(1, 1, 0, 0, 0, 1.5, 0);
+        }
+
+        ,blockScale: function () {
+            this.grid(8, 6, 0, 0, 0, .6, 0);
+        }
+
+        ,kaleidoscope: function () {
+            this.grid(10, 8, 0, 0, 0, 1, 0);
+        }
+
+        ,fan: function () {
+            this.grid(1, 10, 45, 100, 0, 1, 0);
+        }
+
+        ,blindV: function () {
+            this.grid(1, 8, 0, 0, 0, .7, 0);
+        }
+
+        ,blindH: function () {
+            this.grid(10, 1, 0, 0, 0, .7, 0);
+        }
+
+        ,random: function () {
+            // Pick a random transition from the anims array (obj prop)
+            this[this.anims[Math.floor(Math.random() * this.anims.length)]]();
+        }
+
+        ,custom: function() {
+            if (this.RS.nextAnimIndex < 0) {
+                this.RS.nextAnimIndex = this.customAnims.length - 1;
+            }
+            if (this.RS.nextAnimIndex === this.customAnims.length) {
+                this.RS.nextAnimIndex = 0;
+            }
+
+            // Pick the next item in the list of transitions provided by user.
+            this[this.customAnims[this.RS.nextAnimIndex]]();
+        }
+    };
+
+	// Obj to check browser capabilities
+	var testBrowser = {
+        // Browser vendor CSS prefixes
+        browserVendors: ['', '-webkit-', '-moz-', '-ms-', '-o-', '-khtml-']
+
+        // Browser vendor DOM prefixes
+        ,domPrefixes: ['', 'Webkit', 'Moz', 'ms', 'O', 'Khtml']
+
+        // Method to iterate over a property (using all DOM prefixes)
+        // Returns true if prop is recognised by browser (else returns false)
+        ,testDom: function (prop) {
+            var i = this.domPrefixes.length;
+
+            while (i--) {
+                if (typeof document.body.style[this.domPrefixes[i] + prop] !== 'undefined') {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        ,cssTransitions: function () {
+            // Use Modernizr if available & implements csstransitions test
+            if (typeof window.Modernizr !== 'undefined' && Modernizr.csstransitions !== 'undefined') {
+                return Modernizr.csstransitions;
+            }
+
+            // Use testDom method to check prop (returns bool)
+            return this.testDom('Transition');
+        }
+
+        ,cssTransforms3d: function () {
+            // Use Modernizr if available & implements csstransforms3d test
+            if (typeof window.Modernizr !== 'undefined' && Modernizr.csstransforms3d !== 'undefined') {
+                return Modernizr.csstransforms3d;
+            }
+
+            // Check for vendor-less prop
+            if (typeof document.body.style['perspectiveProperty'] !== 'undefined') {
+                return true;
+            }
+
+            // Use testDom method to check prop (returns bool)
+            return this.testDom('Perspective');
+        }
+    };
+
+	// jQuery plugin wrapper
+	$.fn['refineSlide'] = function (settings) {
+		return this.each(function () {
+            // Check if already instantiated on this elem
+			if (!$.data(this, 'refineSlide')) {
+                // Instantiate & store elem + string
+				$.data(this, 'refineSlide', new RS(this, settings));
+			}
+		});
+	}
+})(window.jQuery, window, window.document);
+
+
+/* **********************************************
+     Begin jquery.scrollTo.min.js
+********************************************** */
+
 /**
  * Copyright (c) 2007-2013 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
  * Dual licensed under MIT and GPL.
  * @author Ariel Flesler
  * @version 1.4.6
- */(function(e){function n(e){return typeof e=="object"?e:{top:e,left:e}}var t=e.scrollTo=function(t,n,r){e(window).scrollTo(t,n,r)};t.defaults={axis:"xy",duration:parseFloat(e.fn.jquery)>=1.3?0:1,limit:!0};t.window=function(t){return e(window)._scrollable()};e.fn._scrollable=function(){return this.map(function(){var t=this,n=!t.nodeName||e.inArray(t.nodeName.toLowerCase(),["iframe","#document","html","body"])!=-1;if(!n)return t;var r=(t.contentWindow||t).document||t.ownerDocument||t;return/webkit/i.test(navigator.userAgent)||r.compatMode=="BackCompat"?r.body:r.documentElement})};e.fn.scrollTo=function(r,i,s){if(typeof i=="object"){s=i;i=0}typeof s=="function"&&(s={onAfter:s});r=="max"&&(r=9e9);s=e.extend({},t.defaults,s);i=i||s.duration;s.queue=s.queue&&s.axis.length>1;s.queue&&(i/=2);s.offset=n(s.offset);s.over=n(s.over);return this._scrollable().each(function(){function d(e){u.animate(c,i,s.easing,e&&function(){e.call(this,a,s)})}if(r==null)return;var o=this,u=e(o),a=r,l,c={},p=u.is("html,body");switch(typeof a){case"number":case"string":if(/^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(a)){a=n(a);break}a=e(a,this);if(!a.length)return;case"object":if(a.is||a.style)l=(a=e(a)).offset()}e.each(s.axis.split(""),function(e,n){var r=n=="x"?"Left":"Top",i=r.toLowerCase(),f="scroll"+r,v=o[f],m=t.max(o,n);if(l){c[f]=l[i]+(p?0:v-u.offset()[i]);if(s.margin){c[f]-=parseInt(a.css("margin"+r))||0;c[f]-=parseInt(a.css("border"+r+"Width"))||0}c[f]+=s.offset[i]||0;s.over[i]&&(c[f]+=a[n=="x"?"width":"height"]()*s.over[i])}else{var y=a[i];c[f]=y.slice&&y.slice(-1)=="%"?parseFloat(y)/100*m:y}s.limit&&/^\d+$/.test(c[f])&&(c[f]=c[f]<=0?0:Math.min(c[f],m));if(!e&&s.queue){v!=c[f]&&d(s.onAfterFirst);delete c[f]}});d(s.onAfter)}).end()};t.max=function(t,n){var r=n=="x"?"Width":"Height",i="scroll"+r;if(!e(t).is("html,body"))return t[i]-e(t)[r.toLowerCase()]();var s="client"+r,o=t.ownerDocument.documentElement,u=t.ownerDocument.body;return Math.max(o[i],u[i])-Math.min(o[s],u[s])}})(jQuery);(function(e){function r(t,n,r){var i=n.hash.slice(1),s=document.getElementById(i)||document.getElementsByName(i)[0];if(!s)return;t&&t.preventDefault();var o=e(r.target);if(r.lock&&o.is(":animated")||r.onBefore&&r.onBefore(t,s,o)===!1)return;r.stop&&o._scrollable().stop(!0);if(r.hash){var u=r.offset;u=u&&u.top||u||0;var a=s.id==i?"id":"name",f=e("<a> </a>").attr(a,i).css({position:"absolute",top:e(window).scrollTop()+u,left:e(window).scrollLeft()});s[a]="";e("body").prepend(f);location=n.hash;f.remove();s[a]=i}o.scrollTo(s,r).trigger("notify.serialScroll",[s])}var t=location.href.replace(/#.*/,""),n=e.localScroll=function(t){e("body").localScroll(t)};n.defaults={duration:1e3,axis:"y",event:"click",stop:!0,target:window,reset:!0};n.hash=function(t){if(location.hash){t=e.extend({},n.defaults,t);t.hash=!1;if(t.reset){var s=t.duration;delete t.duration;e(t.target).scrollTo(0,t);t.duration=s}r(0,location,t)}};e.fn.localScroll=function(s){function o(){return!!this.href&&!!this.hash&&this.href.replace(this.hash,"")==t&&(!s.filter||e(this).is(s.filter))}s=e.extend({},n.defaults,s);return s.lazy?this.bind(s.event,function(t){var n=e([t.target,t.target.parentNode]).filter(o)[0];n&&r(t,n,s)}):this.find("a,area").filter(o).bind(s.event,function(e){r(e,this,s)}).end().end()}})(jQuery);(function(e,t,n){"use strict";function i(t,n){this.$slider=e(t).addClass("rs-slider");this.settings=e.extend({},r,n);this.$slides=this.$slider.find("> li");this.totalSlides=this.$slides.length;this.cssTransitions=o.cssTransitions();this.cssTransforms3d=o.cssTransforms3d();this.currentPlace=this.settings.startSlide;this.$currentSlide=this.$slides.eq(this.currentPlace);this.inProgress=!1;this.$sliderWrap=this.$slider.wrap('<div class="rs-wrap" />').parent();this.$sliderBG=this.$slider.wrap('<div class="rs-slide-bg" />').parent();this.settings.slider=this;this.init()}function s(t,n,r){this.RS=t;this.RS.inProgress=!0;this.forward=r;this.transition=n;if(this.transition==="custom"){this.customAnims=this.RS.settings.customTransitions;this.isCustomTransition=!0}if(this.transition==="custom"){var i=this;e.each(this.customAnims,function(t,n){e.inArray(n,i.anims)===-1&&i.customAnims.splice(t,1)})}this.fallback3d=this.RS.settings.fallback3d;this.init()}var r={maxWidth:800,transition:"cubeV",customTransitions:[],fallback3d:"sliceV",perspective:1e3,useThumbs:!0,useArrows:!1,thumbMargin:3,autoPlay:!1,delay:5e3,transitionDuration:800,startSlide:0,keyNav:!0,captionWidth:50,arrowTemplate:'<div class="rs-arrows"><a href="#" class="rs-prev"></a><a href="#" class="rs-next"></a></div>',onInit:function(){},onChange:function(){},afterChange:function(){}};i.prototype={cycling:null,$slideImages:null,init:function(){this.settings.onInit();this.captions();this.settings.transition==="custom"&&(this.nextAnimIndex=-1);this.settings.useArrows&&this.setArrows();this.settings.keyNav&&this.setKeys();for(var t=0;t<this.totalSlides;t++)this.$slides.eq(t).addClass("rs-slide-"+t);if(this.settings.autoPlay){this.setAutoPlay();this.$slider.on({mouseenter:e.proxy(function(){this.cycling!==null&&clearTimeout(this.cycling)},this),mouseleave:e.proxy(this.setAutoPlay,this)})}this.$slideImages=this.$slides.find("img:eq(0)").addClass("rs-slide-image");this.setup()},setup:function(){this.$sliderWrap.css("width",this.settings.maxWidth);this.settings.useThumbs&&this.setThumbs();this.$currentSlide.css({opacity:1,"z-index":2})},setArrows:function(){var t=this;this.$sliderWrap.append(this.settings.arrowTemplate);e(".rs-next",this.$sliderWrap).on("click",function(e){e.preventDefault();t.next()});e(".rs-prev",this.$sliderWrap).on("click",function(e){e.preventDefault();t.prev()})},next:function(){this.settings.transition==="custom"&&this.nextAnimIndex++;this.currentPlace===this.totalSlides-1?this.transition(0,!0):this.transition(this.currentPlace+1,!0)},prev:function(){this.settings.transition==="custom"&&this.nextAnimIndex--;this.currentPlace==0?this.transition(this.totalSlides-1,!1):this.transition(this.currentPlace-1,!1)},setKeys:function(){var t=this;e(n).on("keydown",function(e){e.keyCode===39?t.next():e.keyCode===37&&t.prev()})},setAutoPlay:function(){var e=this;this.cycling=setTimeout(function(){e.next()},this.settings.delay)},setThumbs:function(){var t=this,n=(100-(this.totalSlides-1)*this.settings.thumbMargin)/this.totalSlides+"%";this.$thumbWrap=e('<div class="rs-thumb-wrap" />').appendTo(this.$sliderWrap);for(var r=0;r<this.totalSlides;r++){var i=e("<a />").css({width:n,marginLeft:this.settings.thumbMargin+"%"}).attr("href","#").data("rs-num",r);this.$slideImages.eq(r).clone().removeAttr("style").appendTo(this.$thumbWrap).wrap(i)}this.$thumbWrapLinks=this.$thumbWrap.find("a");this.$thumbWrap.children().last().css("margin-right",-10);this.$thumbWrapLinks.eq(this.settings.startSlide).addClass("active");this.$thumbWrap.on("click","a",function(n){n.preventDefault();t.transition(parseInt(e(this).data("rs-num")))})},captions:function(){var t=this,n=this.$slides.find(".rs-caption");n.css({width:t.settings.captionWidth+"%",opacity:0});this.$currentSlide.find(".rs-caption").css("opacity",1);n.each(function(){e(this).css({transition:"opacity "+t.settings.transitionDuration+"ms linear",backfaceVisibility:"hidden"})})},transition:function(e,t){if(!this.inProgress&&e!==this.currentPlace){typeof t=="undefined"&&(t=e>this.currentPlace?!0:!1);if(this.settings.useThumbs){this.$thumbWrapLinks.eq(this.currentPlace).removeClass("active");this.$thumbWrapLinks.eq(e).addClass("active")}this.$nextSlide=this.$slides.eq(e);this.currentPlace=e;this.settings.onChange();new s(this,this.settings.transition,t)}}};s.prototype={fallback:"fade",anims:["cubeH","cubeV","fade","sliceH","sliceV","slideH","slideV","scale","blockScale","kaleidoscope","fan","blindH","blindV"],customAnims:[],init:function(){this[this.transition]()},before:function(t){var n=this;this.RS.$currentSlide.css("z-index",2);this.RS.$nextSlide.css({opacity:1,"z-index":1});if(this.RS.cssTransitions){this.RS.$currentSlide.find(".rs-caption").css("opacity",0);this.RS.$nextSlide.find(".rs-caption").css("opacity",1)}else{this.RS.$currentSlide.find(".rs-caption").animate({opacity:0},n.RS.settings.transitionDuration);this.RS.$nextSlide.find(".rs-caption").animate({opacity:1},n.RS.settings.transitionDuration)}if(typeof this.setup=="function"){var r=this.setup();setTimeout(function(){t(r)},20)}else this.execute();this.RS.cssTransitions&&e(this.listenTo).one("webkitTransitionEnd transitionend otransitionend oTransitionEnd mstransitionend",e.proxy(this.after,this))},after:function(){this.RS.$sliderBG.removeAttr("style");this.RS.$slider.removeAttr("style");this.RS.$currentSlide.removeAttr("style");this.RS.$nextSlide.removeAttr("style");this.RS.$currentSlide.css({zIndex:1,opacity:0});this.RS.$nextSlide.css({zIndex:2,opacity:1});typeof this.reset=="function"&&this.reset();if(this.RS.settings.autoPlay){clearTimeout(this.RS.cycling);this.RS.setAutoPlay()}this.RS.$currentSlide=this.RS.$nextSlide;this.RS.inProgress=!1;this.RS.settings.afterChange()},fade:function(){var t=this;if(this.RS.cssTransitions){this.setup=function(){t.listenTo=t.RS.$currentSlide;t.RS.$currentSlide.css("transition","opacity "+t.RS.settings.transitionDuration+"ms linear")};this.execute=function(){t.RS.$currentSlide.css("opacity",0)}}else this.execute=function(){t.RS.$currentSlide.animate({opacity:0},t.RS.settings.transitionDuration,function(){t.after()})};this.before(e.proxy(this.execute,this))},cube:function(t,n,r,i,s,o,u){if(!this.RS.cssTransitions||!this.RS.cssTransforms3d)return this[this.fallback3d]();var a=this;this.setup=function(){a.listenTo=a.RS.$slider;this.RS.$sliderBG.css("perspective",1e3);a.RS.$currentSlide.css({transform:"translateZ("+t+"px)",backfaceVisibility:"hidden"});a.RS.$nextSlide.css({opacity:1,backfaceVisibility:"hidden",transform:"translateY("+r+"px) translateX("+n+"px) rotateY("+s+"deg) rotateX("+i+"deg)"});a.RS.$slider.css({transform:"translateZ(-"+t+"px)",transformStyle:"preserve-3d"})};this.execute=function(){a.RS.$slider.css({transition:"all "+a.RS.settings.transitionDuration+"ms ease-in-out",transform:"translateZ(-"+t+"px) rotateX("+o+"deg) rotateY("+u+"deg)"})};this.before(e.proxy(this.execute,this))},cubeH:function(){var t=e(this.RS.$slides).width()/2;this.forward?this.cube(t,t,0,0,90,0,-90):this.cube(t,-t,0,0,-90,0,90)},cubeV:function(){var t=e(this.RS.$slides).height()/2;this.forward?this.cube(t,0,-t,90,0,-90,0):this.cube(t,0,t,-90,0,90,0)},grid:function(t,n,r,i,s,o,u){if(!this.RS.cssTransitions)return this[this.fallback]();var a=this;this.setup=function(){function o(t,n,i,s,o,u,f,l,c){var h=(l+c)*r;return e('<div class="rs-gridlet" />').css({width:t,height:n,top:i,left:s,backgroundImage:"url("+o+")",backgroundPosition:"-"+s+"px -"+i+"px",backgroundSize:u+"px "+f+"px",transition:"all "+a.RS.settings.transitionDuration+"ms ease-in-out "+h+"ms",transform:"none"})}var r=a.RS.settings.transitionDuration/(t+n);a.$img=a.RS.$currentSlide.find("img.rs-slide-image");a.$grid=e("<div />").addClass("rs-grid");a.RS.$currentSlide.prepend(a.$grid);var u=a.$img.width(),f=a.$img.height(),l=a.$img.attr("src"),c=Math.floor(u/t),h=Math.floor(f/n),p=u-t*c,d=Math.ceil(p/t),v=f-n*h,m=Math.ceil(v/n),g=0;i=i==="auto"?u:i;i=i==="min-auto"?-u:i;s=s==="auto"?f:s;s=s==="min-auto"?-f:s;for(var y=0;y<t;y++){var b=0,w=c;if(p>0){var E=p>=d?d:p;w+=E;p-=E}for(var S=0;S<n;S++){var x=h,T=v;if(T>0){E=T>=m?m:v;x+=E;T-=E}a.$grid.append(o(w,x,b,g,l,u,f,y,S));b+=x}g+=w}a.listenTo=a.$grid.children().last();a.$grid.show();a.$img.css("opacity",0);a.$grid.children().first().addClass("rs-top-left");a.$grid.children().last().addClass("rs-bottom-right");a.$grid.children().eq(n-1).addClass("rs-bottom-left");a.$grid.children().eq(-n).addClass("rs-top-right")};this.execute=function(){a.$grid.children().css({opacity:u,transform:"rotate("+r+"deg) translateX("+i+"px) translateY("+s+"px) scale("+o+")"})};this.before(e.proxy(this.execute,this));this.reset=function(){a.$img.css("opacity",1);a.$grid.remove()}},sliceH:function(){this.grid(1,8,0,"min-auto",0,1,0)},sliceV:function(){this.grid(10,1,0,0,"auto",1,0)},slideV:function(){var e=this.forward?"min-auto":"auto";this.grid(1,1,0,0,e,1,1)},slideH:function(){var e=this.forward?"min-auto":"auto";this.grid(1,1,0,e,0,1,1)},scale:function(){this.grid(1,1,0,0,0,1.5,0)},blockScale:function(){this.grid(8,6,0,0,0,.6,0)},kaleidoscope:function(){this.grid(10,8,0,0,0,1,0)},fan:function(){this.grid(1,10,45,100,0,1,0)},blindV:function(){this.grid(1,8,0,0,0,.7,0)},blindH:function(){this.grid(10,1,0,0,0,.7,0)},random:function(){this[this.anims[Math.floor(Math.random()*this.anims.length)]]()},custom:function(){this.RS.nextAnimIndex<0&&(this.RS.nextAnimIndex=this.customAnims.length-1);this.RS.nextAnimIndex===this.customAnims.length&&(this.RS.nextAnimIndex=0);this[this.customAnims[this.RS.nextAnimIndex]]()}};var o={browserVendors:["","-webkit-","-moz-","-ms-","-o-","-khtml-"],domPrefixes:["","Webkit","Moz","ms","O","Khtml"],testDom:function(e){var t=this.domPrefixes.length;while(t--)if(typeof n.body.style[this.domPrefixes[t]+e]!="undefined")return!0;return!1},cssTransitions:function(){return typeof t.Modernizr!="undefined"&&Modernizr.csstransitions!=="undefined"?Modernizr.csstransitions:this.testDom("Transition")},cssTransforms3d:function(){return typeof t.Modernizr!="undefined"&&Modernizr.csstransforms3d!=="undefined"?Modernizr.csstransforms3d:typeof n.body.style["perspectiveProperty"]!="undefined"?!0:this.testDom("Perspective")}};e.fn.refineSlide=function(t){return this.each(function(){e.data(this,"refineSlide")||e.data(this,"refineSlide",new i(this,t))})}})(window.jQuery,window,window.document);jQuery(function(e){e(".page-holder").each(function(){var t=e(this).attr("data-page-id");e(this).load(t+".html #"+t,function(){var n=e(this).next().attr("data-page-id"),r=e(this).prev().attr("data-page-id");e(".next-link",this).attr("href","#"+n);e(".prev-link",this).attr("href","#"+r);e.localScroll({queue:!0,duration:1e3,hash:!0});e.localScroll.hash({queue:!0,duration:1e3});if(t==="media"){e(".rs-slider").refineSlide({maxWidth:1e3,transition:"fade"});e(".gallery").on("click",function(t){var n=this,r=e(".slides");t.preventDefault();e(n).fadeOut("slow",function(){r.fadeIn("slow",function(){var t=e(".hide-gallery");t.on("click",function(t){t.preventDefault();r.fadeOut("slow",function(){e(n).fadeIn("slow")})})})})})}})})});
+ */
+;(function($){var h=$.scrollTo=function(a,b,c){$(window).scrollTo(a,b,c)};h.defaults={axis:'xy',duration:parseFloat($.fn.jquery)>=1.3?0:1,limit:true};h.window=function(a){return $(window)._scrollable()};$.fn._scrollable=function(){return this.map(function(){var a=this,isWin=!a.nodeName||$.inArray(a.nodeName.toLowerCase(),['iframe','#document','html','body'])!=-1;if(!isWin)return a;var b=(a.contentWindow||a).document||a.ownerDocument||a;return/webkit/i.test(navigator.userAgent)||b.compatMode=='BackCompat'?b.body:b.documentElement})};$.fn.scrollTo=function(e,f,g){if(typeof f=='object'){g=f;f=0}if(typeof g=='function')g={onAfter:g};if(e=='max')e=9e9;g=$.extend({},h.defaults,g);f=f||g.duration;g.queue=g.queue&&g.axis.length>1;if(g.queue)f/=2;g.offset=both(g.offset);g.over=both(g.over);return this._scrollable().each(function(){if(e==null)return;var d=this,$elem=$(d),targ=e,toff,attr={},win=$elem.is('html,body');switch(typeof targ){case'number':case'string':if(/^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(targ)){targ=both(targ);break}targ=$(targ,this);if(!targ.length)return;case'object':if(targ.is||targ.style)toff=(targ=$(targ)).offset()}$.each(g.axis.split(''),function(i,a){var b=a=='x'?'Left':'Top',pos=b.toLowerCase(),key='scroll'+b,old=d[key],max=h.max(d,a);if(toff){attr[key]=toff[pos]+(win?0:old-$elem.offset()[pos]);if(g.margin){attr[key]-=parseInt(targ.css('margin'+b))||0;attr[key]-=parseInt(targ.css('border'+b+'Width'))||0}attr[key]+=g.offset[pos]||0;if(g.over[pos])attr[key]+=targ[a=='x'?'width':'height']()*g.over[pos]}else{var c=targ[pos];attr[key]=c.slice&&c.slice(-1)=='%'?parseFloat(c)/100*max:c}if(g.limit&&/^\d+$/.test(attr[key]))attr[key]=attr[key]<=0?0:Math.min(attr[key],max);if(!i&&g.queue){if(old!=attr[key])animate(g.onAfterFirst);delete attr[key]}});animate(g.onAfter);function animate(a){$elem.animate(attr,f,g.easing,a&&function(){a.call(this,targ,g)})}}).end()};h.max=function(a,b){var c=b=='x'?'Width':'Height',scroll='scroll'+c;if(!$(a).is('html,body'))return a[scroll]-$(a)[c.toLowerCase()]();var d='client'+c,html=a.ownerDocument.documentElement,body=a.ownerDocument.body;return Math.max(html[scroll],body[scroll])-Math.min(html[d],body[d])};function both(a){return typeof a=='object'?a:{top:a,left:a}}})(jQuery);
+
+
+/* **********************************************
+     Begin jquery.localScroll.min.js
+********************************************** */
+
+/**
+ * Copyright (c) 2007-2010 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Dual licensed under MIT and GPL.
+ * @author Ariel Flesler
+ * @version 1.2.9b
+ */
+;(function($){var h=location.href.replace(/#.*/,'');var i=$.localScroll=function(a){$('body').localScroll(a)};i.defaults={duration:1000,axis:'y',event:'click',stop:true,target:window,reset:true};i.hash=function(a){if(location.hash){a=$.extend({},i.defaults,a);a.hash=false;if(a.reset){var d=a.duration;delete a.duration;$(a.target).scrollTo(0,a);a.duration=d}scroll(0,location,a)}};$.fn.localScroll=function(b){b=$.extend({},i.defaults,b);return b.lazy?this.bind(b.event,function(e){var a=$([e.target,e.target.parentNode]).filter(filter)[0];if(a)scroll(e,a,b)}):this.find('a,area').filter(filter).bind(b.event,function(e){scroll(e,this,b)}).end().end();function filter(){return!!this.href&&!!this.hash&&this.href.replace(this.hash,'')==h&&(!b.filter||$(this).is(b.filter))}};function scroll(e,a,b){var c=a.hash.slice(1),elem=document.getElementById(c)||document.getElementsByName(c)[0];if(!elem)return;if(e)e.preventDefault();var d=$(b.target);if(b.lock&&d.is(':animated')||b.onBefore&&b.onBefore(e,elem,d)===false)return;if(b.stop)d._scrollable().stop(true);if(b.hash){var f=b.offset;f=f&&f.top||f||0;var g=elem.id==c?'id':'name',$a=$('<a> </a>').attr(g,c).css({position:'absolute',top:$(window).scrollTop()+f,left:$(window).scrollLeft()});elem[g]='';$('body').prepend($a);location=a.hash;$a.remove();elem[g]=c}d.scrollTo(elem,b).trigger('notify.serialScroll',[elem])}})(jQuery);
+
+/* **********************************************
+     Begin bootstrap.min.js
+********************************************** */
+
+/**
+* Bootstrap.js by @fat & @mdo
+* plugins: bootstrap-scrollspy.js
+* Copyright 2013 Twitter, Inc.
+* http://www.apache.org/licenses/LICENSE-2.0.txt
+*/
+!function(a){function b(b,c){var d=a.proxy(this.process,this),e=a(b).is("body")?a(window):a(b),f;this.options=a.extend({},a.fn.scrollspy.defaults,c),this.$scrollElement=e.on("scroll.scroll-spy.data-api",d),this.selector=(this.options.target||(f=a(b).attr("href"))&&f.replace(/.*(?=#[^\s]+$)/,"")||"")+" .nav li > a",this.$body=a("body"),this.refresh(),this.process()}b.prototype={constructor:b,refresh:function(){var b=this,c;this.offsets=a([]),this.targets=a([]),c=this.$body.find(this.selector).map(function(){var c=a(this),d=c.data("target")||c.attr("href"),e=/^#\w/.test(d)&&a(d);return e&&e.length&&[[e.position().top+(!a.isWindow(b.$scrollElement.get(0))&&b.$scrollElement.scrollTop()),d]]||null}).sort(function(a,b){return a[0]-b[0]}).each(function(){b.offsets.push(this[0]),b.targets.push(this[1])})},process:function(){var a=this.$scrollElement.scrollTop()+this.options.offset,b=this.$scrollElement[0].scrollHeight||this.$body[0].scrollHeight,c=b-this.$scrollElement.height(),d=this.offsets,e=this.targets,f=this.activeTarget,g;if(a>=c)return f!=(g=e.last()[0])&&this.activate(g);for(g=d.length;g--;)f!=e[g]&&a>=d[g]&&(!d[g+1]||a<=d[g+1])&&this.activate(e[g])},activate:function(b){var c,d;this.activeTarget=b,a(this.selector).parent(".active").removeClass("active"),d=this.selector+'[data-target="'+b+'"],'+this.selector+'[href="'+b+'"]',c=a(d).parent("li").addClass("active"),c.parent(".dropdown-menu").length&&(c=c.closest("li.dropdown").addClass("active")),c.trigger("activate")}};var c=a.fn.scrollspy;a.fn.scrollspy=function(c){return this.each(function(){var d=a(this),e=d.data("scrollspy"),f=typeof c=="object"&&c;e||d.data("scrollspy",e=new b(this,f)),typeof c=="string"&&e[c]()})},a.fn.scrollspy.Constructor=b,a.fn.scrollspy.defaults={offset:10},a.fn.scrollspy.noConflict=function(){return a.fn.scrollspy=c,this},a(window).on("load",function(){a('[data-spy="scroll"]').each(function(){var b=a(this);b.scrollspy(b.data())})})}(window.jQuery)
+
+/* **********************************************
+     Begin custom.js
+********************************************** */
+
+jQuery(function($){
+
+	// insert the correct pages
+	$('.page-holder').each(function(){
+		var pageId = $(this).attr('data-page-id');
+		$(this).load(pageId+".html #"+pageId, function(){
+			// set the correct targets for the next/prev arrows
+			var nextHash = $(this).next().attr('data-page-id');
+			var prevHash = $(this).prev().attr('data-page-id');
+			$('.next-link', this).attr('href', '#'+nextHash);
+			$('.prev-link', this).attr('href', '#'+prevHash);
+			
+			// NB. It's important that we call localScroll AFTER we've assigned the href attributes
+			// otherwise localScroll won't pick up the arrow icons as links.
+			//*** Local scroll ****//
+			$.localScroll({
+				queue:true,
+				duration:1000,
+				hash:true
+			});
+			// Scroll initially if there's a hash (#something) in the url 
+			$.localScroll.hash({
+				queue:true,
+				duration:1000
+			});
+                        
+                        if(pageId === 'media'){
+                            
+                            $('.rs-slider').refineSlide({
+                                    maxWidth: 1000, // set to native image width (px)
+                                    transition: 'fade'
+                        });
+                        
+                            $(".gallery").on('click', function(e){
+                              var clicked = this;
+                              var slides = $('.slides');
+//                              var galleries = $(".gallery");
+                              e.preventDefault();
+                              $(clicked).fadeOut('slow', function(){
+                                  slides.fadeIn('slow', function(){
+                                        var hide = $('.hide-gallery');
+                                        hide.on('click', function(f){
+                                        f.preventDefault();
+                                        slides.fadeOut('slow', function(){
+                                            $(clicked).fadeIn('slow');
+                                        });
+                                    });
+                                  });
+                              });
+                            });
+                        }
+                        
+		});
+                
+	});
+        
+//        setActive();
+//        
+//        $(".navmenu a").on('click', function(){
+//            setActive();
+//        });
+        
+        // scrollspy
+//        $("body").scrollspy();
+		
+});
