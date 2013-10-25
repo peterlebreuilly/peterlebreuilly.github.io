@@ -9219,15 +9219,20 @@ article p {
     padding-bottom: 0; }
 
 /* line 70, ../_assets/sass/custom/partials/_layout.scss */
+#intro .pane {
+  padding-left: 10%;
+  width: 80%; }
+
+/* line 75, ../_assets/sass/custom/partials/_layout.scss */
 .rs-slider {
   margin: 0; }
 
-/* line 74, ../_assets/sass/custom/partials/_layout.scss */
+/* line 79, ../_assets/sass/custom/partials/_layout.scss */
 #photos, #film, #sound {
   clear: both;
   overflow: auto; }
 
-/* line 79, ../_assets/sass/custom/partials/_layout.scss */
+/* line 84, ../_assets/sass/custom/partials/_layout.scss */
 #film {
   margin: 2em 0; }
 

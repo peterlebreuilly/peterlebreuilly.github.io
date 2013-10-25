@@ -4,7 +4,7 @@ title: Peter Le Breuilly
 id: intro
 order: 0
 ---
-<div  class="span6 offset3">
+<div>
 <blockquote>A<br/>
 <span class="alt-font">faultless</span><br/>
 performance</blockquote>
