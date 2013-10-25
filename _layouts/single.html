@@ -17,12 +17,12 @@
 	</nav>
 	
 	{% if page.id != "intro" %}
-	<section id="{{page.id}}" class="span10 pane">
+	<section id="{{page.id}}" class="pane">
 		<header>
 			<h2 class="page-header">{{ page.title }}</h2>
 		</header>
 	{% else %}
-	<section id="intro" class="span10 pane">
+	<section id="intro" class="pane">
 		<header>
 			<h1 class="page-header">{{ page.title | upcase }}</h1>
 		</header>

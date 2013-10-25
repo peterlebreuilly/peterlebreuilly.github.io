@@ -27,7 +27,9 @@ a.gallery {
       img, video {
         border: 1px solid $whiteSmoke;
         @include box-shadow(3px 3px 6px $grayCharcoal);
-        
+        width: 90%;
+        margin: auto;
+        display: block;
       }
 }
 

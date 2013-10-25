@@ -1,7 +1,19 @@
 h1, h2, h3 {
   margin: 0;
   font-family: HattoriHanzoLight;
+  font-weight: normal;
   color: $blueBreton;
+  line-height: $baseLineHeight;
+  font-size: $baseFontSize;
+}
+
+h1 {
+    font-size: $baseFontSize * 2; // - 24px
+}
+
+h2 {
+    font-size: $baseFontSize * 1.666666667; // - 20px
+    line-height: 1.2em;
 }
 
 h3 {
@@ -10,12 +22,13 @@ h3 {
 
 blockquote {
   border: none;
-  font-size: $baseFontSize*5;
-  line-height: $baseFontSize*6;
+  font-size: $baseFontSize*4; // -48px
+  line-height: $baseFontSize*5; // -90px
   text-align: center;
   color: $grayCharcoal;
   font-family: lane-narrowregular;
   padding: 0;
+  margin-bottom: $baseLineHeight * 1.5;
   
   .alt-font {
     font-size: 1.25em;
@@ -29,11 +42,13 @@ cite {
   text-align: center;
   font-family: $sansFontFamily;
   font-size: 1em;
+  color: lighten($blueBreton, 25%);
+  text-shadow: 1px 1px 1px white;
 }
 
-p {
-  font-size: 1.5em;
-  line-height: 2em;
+p, address {
+  font-size: $baseFontSize * 1.333333333; // 16px
+  line-height: 1.6875em;
   font-family: HattoriHanzoLight;
 }
 
@@ -44,11 +59,10 @@ small {
 
 
 .page-header {
-  margin: 1em 0;
-  font-size: 2.5em;
   padding: 0;
   border-color: $grayCadet;
   text-align: right;
+  margin: 18px 0 48px;
 }
 
 #about h2, #about p {
@@ -72,10 +86,6 @@ small {
 }
 
 address {
-margin-top: 1em;
-font-size: 1.75em;
-line-height: 1.5em;
-font-family: HattoriHanzoLight;
 color: darken($whiteSmoke, 60%);
 
     b {

@@ -9057,86 +9057,97 @@ body {
 h1, h2, h3 {
   margin: 0;
   font-family: HattoriHanzoLight;
-  color: #4d5965; }
+  font-weight: normal;
+  color: #4d5965;
+  line-height: 18px;
+  font-size: 12px; }
 
-/* line 7, ../_assets/sass/custom/partials/_typography.scss */
+/* line 10, ../_assets/sass/custom/partials/_typography.scss */
+h1 {
+  font-size: 24px; }
+
+/* line 14, ../_assets/sass/custom/partials/_typography.scss */
+h2 {
+  font-size: 20.0px;
+  line-height: 1.2em; }
+
+/* line 19, ../_assets/sass/custom/partials/_typography.scss */
 h3 {
   display: inline; }
 
-/* line 11, ../_assets/sass/custom/partials/_typography.scss */
+/* line 23, ../_assets/sass/custom/partials/_typography.scss */
 blockquote {
   border: none;
-  font-size: 70px;
-  line-height: 84px;
+  font-size: 48px;
+  line-height: 60px;
   text-align: center;
   color: #36454f;
   font-family: lane-narrowregular;
-  padding: 0; }
-  /* line 20, ../_assets/sass/custom/partials/_typography.scss */
+  padding: 0;
+  margin-bottom: 27px; }
+  /* line 33, ../_assets/sass/custom/partials/_typography.scss */
   blockquote .alt-font {
     font-size: 1.25em;
     color: #318ce7;
     font-family: walkway_boldregular; }
 
-/* line 27, ../_assets/sass/custom/partials/_typography.scss */
+/* line 40, ../_assets/sass/custom/partials/_typography.scss */
 cite {
   display: block;
   text-align: center;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1em; }
+  font-size: 1em;
+  color: #8b99a7;
+  text-shadow: 1px 1px 1px white; }
 
-/* line 34, ../_assets/sass/custom/partials/_typography.scss */
-p {
-  font-size: 1.5em;
-  line-height: 2em;
+/* line 49, ../_assets/sass/custom/partials/_typography.scss */
+p, address {
+  font-size: 16.0px;
+  line-height: 1.6875em;
   font-family: HattoriHanzoLight; }
 
-/* line 40, ../_assets/sass/custom/partials/_typography.scss */
+/* line 55, ../_assets/sass/custom/partials/_typography.scss */
 small {
   font-style: italic;
   padding-left: 0.5em; }
 
-/* line 46, ../_assets/sass/custom/partials/_typography.scss */
+/* line 61, ../_assets/sass/custom/partials/_typography.scss */
 .page-header {
-  margin: 1em 0;
-  font-size: 2.5em;
   padding: 0;
-  border-color: #91a3b0; }
+  border-color: #91a3b0;
+  text-align: right;
+  margin: 18px 0 48px; }
 
-/* line 53, ../_assets/sass/custom/partials/_typography.scss */
+/* line 68, ../_assets/sass/custom/partials/_typography.scss */
 #about h2, #about p {
   color: #91a3b0; }
 
-/* line 57, ../_assets/sass/custom/partials/_typography.scss */
+/* line 72, ../_assets/sass/custom/partials/_typography.scss */
 #intro .page-header {
   border: none; }
 
-/* line 61, ../_assets/sass/custom/partials/_typography.scss */
+/* line 76, ../_assets/sass/custom/partials/_typography.scss */
 .more-link {
   float: right;
   clear: both;
   font-style: italic;
   color: #4d5965; }
-  /* line 67, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 82, ../_assets/sass/custom/partials/_typography.scss */
   .more-link:hover, .more-link:active, .more-link:visited {
     text-decoration: none;
     color: #318ce7; }
 
-/* line 73, ../_assets/sass/custom/partials/_typography.scss */
+/* line 88, ../_assets/sass/custom/partials/_typography.scss */
 address {
-  margin-top: 1em;
-  font-size: 1.75em;
-  line-height: 1.5em;
-  font-family: HattoriHanzoLight;
   color: #5c5c5c; }
-  /* line 80, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 91, ../_assets/sass/custom/partials/_typography.scss */
   address b {
     color: #36454f; }
-  /* line 84, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 95, ../_assets/sass/custom/partials/_typography.scss */
   address a, address a:link, address a:visited {
     display: block;
     color: whitesmoke; }
-    /* line 88, ../_assets/sass/custom/partials/_typography.scss */
+    /* line 99, ../_assets/sass/custom/partials/_typography.scss */
     address a:hover, address a:active, address a:link:hover, address a:link:active, address a:visited:hover, address a:visited:active {
       color: #36454f;
       text-decoration: none; }
@@ -9192,25 +9203,31 @@ article p {
 /* line 50, ../_assets/sass/custom/partials/_layout.scss */
 .page-holder {
   overflow: visible;
+  /* height: 95%; */
   min-height: 95%; }
 
-/* line 55, ../_assets/sass/custom/partials/_layout.scss */
+/* line 56, ../_assets/sass/custom/partials/_layout.scss */
 .row-fluid .pane {
-  width: 100%;
+  width: 70%;
   min-height: 100%;
-  margin-left: 0;
-  padding: 1em 2.12766%; }
-  /* line 61, ../_assets/sass/custom/partials/_layout.scss */
+  /* margin-left: 0;
+  padding: 1em $fluidGridGutterWidth; */
+  padding: 1em 10% 1em 20%; }
+  /* line 63, ../_assets/sass/custom/partials/_layout.scss */
   .row-fluid .pane .row-fluid {
     height: 100%;
     padding-bottom: 0; }
 
-/* line 68, ../_assets/sass/custom/partials/_layout.scss */
+/* line 70, ../_assets/sass/custom/partials/_layout.scss */
+.rs-slider {
+  margin: 0; }
+
+/* line 74, ../_assets/sass/custom/partials/_layout.scss */
 #photos, #film, #sound {
   clear: both;
   overflow: auto; }
 
-/* line 73, ../_assets/sass/custom/partials/_layout.scss */
+/* line 79, ../_assets/sass/custom/partials/_layout.scss */
 #film {
   margin: 2em 0; }
 
@@ -9303,14 +9320,17 @@ a.gallery {
   border: 1px solid whitesmoke;
   -webkit-box-shadow: 3px 3px 6px #36454f;
   -moz-box-shadow: 3px 3px 6px #36454f;
-  box-shadow: 3px 3px 6px #36454f; }
+  box-shadow: 3px 3px 6px #36454f;
+  width: 90%;
+  margin: auto;
+  display: block; }
 
-/* line 36, ../_assets/sass/custom/partials/_images.scss */
+/* line 38, ../_assets/sass/custom/partials/_images.scss */
 .slides a {
   display: inline-block;
   margin: 0.75em;
   color: whitesmoke; }
-  /* line 41, ../_assets/sass/custom/partials/_images.scss */
+  /* line 43, ../_assets/sass/custom/partials/_images.scss */
   .slides a:hover {
     color: #36454f;
     text-decoration: none; }
