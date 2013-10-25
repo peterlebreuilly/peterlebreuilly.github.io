@@ -21,7 +21,7 @@
 {% for order in site.page_order %}
 {% for page in site.pages %}
 {% if page.id == order %}
-<div class="page-holder" data-page-id="{{ page.id }}" id="{{ page.id }}"></div>
+<div class="page-holder" data-page-id="{{ page.id }}-view" id="{{ page.id }}">{{ page.content }}</div>
 {% endif %}
 {% endfor %}
 {% endfor %}
