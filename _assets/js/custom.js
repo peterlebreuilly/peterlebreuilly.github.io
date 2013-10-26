@@ -3,7 +3,7 @@ jQuery(function($){
 	// insert the correct pages
 	$('.page-holder').each(function(){
 		var pageId = $(this).attr('data-page-id');
-		$(this).load(pageId+".html #"+pageId, function(){
+		$(this).load(pageId+".html #"+pageId+"-view", function(){
 			// set the correct targets for the next/prev arrows
 			var nextHash = $(this).next().attr('data-page-id');
 			var prevHash = $(this).prev().attr('data-page-id');
