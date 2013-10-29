@@ -146,18 +146,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/_assets\/sass\/boot\/_button-groups.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_button-groups.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_button-groups.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
     "\/_assets\/sass\/boot\/_thumbnails.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -167,6 +155,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/css\/_thumbnails.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/_assets\/sass\/boot\/_button-groups.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_button-groups.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_button-groups.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -368,15 +368,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/photos\/productions\/placeholder.jpg" : {
+    "\/photos\/headshots\/images\/DSC4895-1.jpg" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
+      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/DSC4895-1.jpg",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
-      "initialSize" : 28282,
+      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/DSC4895-1.jpg",
+      "initialSize" : 173104,
       "fileType" : 4096
     },
     "\/photos\/DSC4833.jpg" : {
@@ -390,15 +390,15 @@
       "initialSize" : 243272,
       "fileType" : 4096
     },
-    "\/photos\/headshots\/images\/DSC4895-1.jpg" : {
+    "\/photos\/productions\/placeholder.jpg" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/DSC4895-1.jpg",
+      "inputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
       "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/DSC4895-1.jpg",
-      "initialSize" : 173104,
+      "outputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
+      "initialSize" : 28282,
       "fileType" : 4096
     },
     "\/_assets\/sass\/boot\/_scaffolding.scss" : {
@@ -448,16 +448,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/photos\/headshots\/images\/altered\/DSC4882.jpg" : {
+    "\/_assets\/sass\/boot\/_modals.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
-      "initialSize" : 104829,
-      "fileType" : 4096
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_modals.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_modals.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/_includes\/header.html" : {
       "ignoreWasSetByUser" : 0,
@@ -465,15 +466,6 @@
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/_includes\/header.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/media.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/media.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -501,17 +493,25 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/_assets\/sass\/boot\/_modals.scss" : {
+    "\/media.html" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_modals.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_modals.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/media.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/photos\/headshots\/images\/altered\/DSC4882.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
+      "initialSize" : 104829,
+      "fileType" : 4096
     },
     "\/photos\/productions\/images\/thumbs\/27db0414290681c5a0dff696f2fcf7e2.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -684,18 +684,6 @@
       "initialSize" : 146905,
       "fileType" : 4096
     },
-    "\/_assets\/sass\/boot\/_tables.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_tables.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_tables.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
     "\/css\/refineslide.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -716,6 +704,17 @@
       "outputAbbreviatedPath" : "\/css\/_color-me-sass.css",
       "fileType" : 4,
       "debugStyle" : 0
+    },
+    "\/img\/stare(cropped).png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/img\/stare(cropped).png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/img\/stare(cropped).png",
+      "initialSize" : 117698,
+      "fileType" : 8192
     },
     "\/js\/minified\/jquery.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -751,17 +750,6 @@
       "initialSize" : 23846,
       "fileType" : 8192
     },
-    "\/img\/stare(cropped).png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/img\/stare(cropped).png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/img\/stare(cropped).png",
-      "initialSize" : 117698,
-      "fileType" : 8192
-    },
     "\/_assets\/sass\/boot\/_component-animations.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -784,6 +772,18 @@
       "outputAbbreviatedPath" : "\/img\/dad.png",
       "initialSize" : 162896,
       "fileType" : 8192
+    },
+    "\/_assets\/sass\/boot\/bootstrap.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/bootstrap.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/bootstrap.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/_assets\/sass\/cms\/colors\/_whites.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -808,15 +808,15 @@
       "outputAbbreviatedPath" : "\/js\/minified\/jquery.localScroll.min-ck.js",
       "fileType" : 64
     },
-    "\/_assets\/sass\/boot\/bootstrap.scss" : {
+    "\/_assets\/sass\/boot\/_tables.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/bootstrap.scss",
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_tables.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/bootstrap.css",
+      "outputAbbreviatedPath" : "\/css\/_tables.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -933,14 +933,17 @@
       "initialSize" : 143914,
       "fileType" : 4096
     },
-    "\/_layouts\/test.html" : {
+    "\/_assets\/sass\/custom\/_print.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_layouts\/test.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/_assets\/sass\/custom\/_print.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_print.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/img\/willy(large).png" : {
       "ignoreWasSetByUser" : 0,
@@ -964,6 +967,15 @@
       "initialSize" : 28076,
       "fileType" : 4096
     },
+    "\/_layouts\/test.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_layouts\/test.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/img\/muffin.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -974,18 +986,6 @@
       "outputAbbreviatedPath" : "\/img\/muffin.png",
       "initialSize" : 12842,
       "fileType" : 8192
-    },
-    "\/_assets\/sass\/custom\/_print.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/custom\/_print.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_print.css",
-      "fileType" : 4,
-      "debugStyle" : 0
     },
     "\/_assets\/sass\/cms\/colors\/_grays.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1124,17 +1124,16 @@
       "initialSize" : 159321,
       "fileType" : 4096
     },
-    "\/_assets\/sass\/boot\/_layouts.scss" : {
+    "\/photos\/DSC4866.jpg" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_layouts.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_layouts.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
+      "initialSize" : 98429,
+      "fileType" : 4096
     },
     "\/photos\/DSC4856.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -1159,26 +1158,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/photos\/DSC4866.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
-      "initialSize" : 98429,
-      "fileType" : 4096
-    },
-    "\/_assets\/sass\/boot\/_sprites.scss" : {
+    "\/_assets\/sass\/boot\/_layouts.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_sprites.scss",
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_layouts.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_sprites.css",
+      "outputAbbreviatedPath" : "\/css\/_layouts.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -1214,6 +1202,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/css\/_breadcrumbs.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/_assets\/sass\/boot\/_sprites.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_sprites.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_sprites.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -1294,16 +1294,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/apple-touch-icon-76x76.png" : {
+    "\/_assets\/sass\/custom\/partials\/_fonts.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/apple-touch-icon-76x76.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/apple-touch-icon-76x76.png",
-      "initialSize" : 12849,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/_assets\/sass\/custom\/partials\/_fonts.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_fonts.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/photos\/27db0414290681c5a0dff696f2fcf7e2.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -1316,17 +1317,16 @@
       "initialSize" : 44006,
       "fileType" : 4096
     },
-    "\/_assets\/sass\/custom\/partials\/_fonts.scss" : {
+    "\/apple-touch-icon-76x76.png" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/custom\/partials\/_fonts.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_fonts.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/apple-touch-icon-76x76.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/apple-touch-icon-76x76.png",
+      "initialSize" : 12849,
+      "fileType" : 8192
     },
     "\/_assets\/sass\/boot\/_accordion.scss" : {
       "ignoreWasSetByUser" : 0,

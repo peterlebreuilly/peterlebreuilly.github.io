@@ -1,3 +1,23 @@
+body {
+  font-size: 12px;
+  line-height: 18px;
+  
+  @media (min-width: 760px) and (max-width: 979px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  @media (min-width: 980px) and (max-width: 1199px) {
+    font-size: 18px;
+    line-height: 27px;
+  }
+  
+  @media (min-width: 1200px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
 h1, h2, h3 {
   margin: 0;
   font-family: HattoriHanzoLight;
@@ -8,11 +28,13 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: $baseFontSize * 2; // - 24px
+    // font-size: $baseFontSize * 2; // - 24px
+    font-size: 2em;
 }
 
 h2 {
-    font-size: $baseFontSize * 1.666666667; // - 20px
+   // font-size: $baseFontSize * 1.666666667; // - 20px
+   font-size: 1.666666667em;
     line-height: 1.2em;
 }
 
@@ -22,13 +44,18 @@ h3 {
 
 blockquote {
   border: none;
-  font-size: $baseFontSize*4; // -48px
-  line-height: $baseFontSize*5; // -90px
+  // font-size: $baseFontSize*4; // -48px
+  font-size: 4em;
+  line-height: 0.5em;
   text-align: center;
   color: $grayCharcoal;
   font-family: lane-narrowregular;
   padding: 0;
   margin-bottom: $baseLineHeight * 1.5;
+  
+  span {
+    display: block;
+  }
   
   .alt-font {
     font-size: 1.25em;
@@ -47,7 +74,8 @@ cite {
 }
 
 p, address {
-  font-size: $baseFontSize * 1.333333333; // 16px
+ // font-size: $baseFontSize * 1.333333333; // 16px
+  font-size: 1.333333333em;
   line-height: 1.6875em;
   font-family: HattoriHanzoLight;
 }

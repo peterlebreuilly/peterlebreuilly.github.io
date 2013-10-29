@@ -5,8 +5,8 @@ id: intro
 order: 0
 ---
 <div>
-<blockquote>A<br/>
+<blockquote><span>A</span><br/>
 <span class="alt-font">faultless</span><br/>
-performance</blockquote>
+<span>performance</span></blockquote>
 <cite>Stratford Upon Avon Herald</cite>
 </div>
