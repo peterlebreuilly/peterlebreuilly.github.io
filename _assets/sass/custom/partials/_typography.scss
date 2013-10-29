@@ -46,12 +46,12 @@ blockquote {
   border: none;
   // font-size: $baseFontSize*4; // -48px
   font-size: 4em;
-  line-height: 0.5em;
+  line-height: 0.65em;
   text-align: center;
   color: $grayCharcoal;
   font-family: lane-narrowregular;
   padding: 0;
-  margin-bottom: $baseLineHeight * 1.5;
+  margin-bottom: 1em;
   
   span {
     display: block;
