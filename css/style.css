@@ -9080,22 +9080,23 @@ h1, h2, h3 {
   font-weight: normal;
   color: #4d5965;
   line-height: 20px;
-  font-size: 14px; }
+  font-size: 14px;
+  text-shadow: 0px 1px 1px white; }
 
-/* line 30, ../_assets/sass/custom/partials/_typography.scss */
+/* line 31, ../_assets/sass/custom/partials/_typography.scss */
 h1 {
   font-size: 2em; }
 
-/* line 35, ../_assets/sass/custom/partials/_typography.scss */
+/* line 36, ../_assets/sass/custom/partials/_typography.scss */
 h2 {
   font-size: 1.666666667em;
   line-height: 1.2em; }
 
-/* line 41, ../_assets/sass/custom/partials/_typography.scss */
+/* line 42, ../_assets/sass/custom/partials/_typography.scss */
 h3 {
   display: inline; }
 
-/* line 45, ../_assets/sass/custom/partials/_typography.scss */
+/* line 46, ../_assets/sass/custom/partials/_typography.scss */
 blockquote {
   border: none;
   font-size: 4em;
@@ -9105,16 +9106,16 @@ blockquote {
   font-family: lane-narrowregular;
   padding: 0;
   margin-bottom: 1em; }
-  /* line 56, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 57, ../_assets/sass/custom/partials/_typography.scss */
   blockquote span {
     display: block; }
-  /* line 60, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 61, ../_assets/sass/custom/partials/_typography.scss */
   blockquote .alt-font {
     font-size: 1.25em;
     color: #318ce7;
     font-family: walkway_boldregular; }
 
-/* line 67, ../_assets/sass/custom/partials/_typography.scss */
+/* line 68, ../_assets/sass/custom/partials/_typography.scss */
 cite {
   display: block;
   text-align: center;
@@ -9123,54 +9124,54 @@ cite {
   color: #8b99a7;
   text-shadow: 1px 1px 1px white; }
 
-/* line 76, ../_assets/sass/custom/partials/_typography.scss */
+/* line 77, ../_assets/sass/custom/partials/_typography.scss */
 p, address {
   font-size: 1.333333333em;
   line-height: 1.6875em;
   font-family: HattoriHanzoLight; }
 
-/* line 83, ../_assets/sass/custom/partials/_typography.scss */
+/* line 84, ../_assets/sass/custom/partials/_typography.scss */
 small {
   font-style: italic;
   padding-left: 0.5em; }
 
-/* line 89, ../_assets/sass/custom/partials/_typography.scss */
+/* line 90, ../_assets/sass/custom/partials/_typography.scss */
 .page-header {
   padding: 0;
   border-color: #91a3b0;
   text-align: right;
   margin: 18px 0 48px; }
 
-/* line 96, ../_assets/sass/custom/partials/_typography.scss */
+/* line 97, ../_assets/sass/custom/partials/_typography.scss */
 #about h2, #about p {
   color: #91a3b0; }
 
-/* line 100, ../_assets/sass/custom/partials/_typography.scss */
+/* line 101, ../_assets/sass/custom/partials/_typography.scss */
 #intro .page-header {
   border: none; }
 
-/* line 104, ../_assets/sass/custom/partials/_typography.scss */
+/* line 105, ../_assets/sass/custom/partials/_typography.scss */
 .more-link {
   float: right;
   clear: both;
   font-style: italic;
   color: #4d5965; }
-  /* line 110, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 111, ../_assets/sass/custom/partials/_typography.scss */
   .more-link:hover, .more-link:active, .more-link:visited {
     text-decoration: none;
     color: #318ce7; }
 
-/* line 116, ../_assets/sass/custom/partials/_typography.scss */
+/* line 117, ../_assets/sass/custom/partials/_typography.scss */
 address {
   color: #5c5c5c; }
-  /* line 119, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 120, ../_assets/sass/custom/partials/_typography.scss */
   address b {
     color: #36454f; }
-  /* line 123, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 124, ../_assets/sass/custom/partials/_typography.scss */
   address a, address a:link, address a:visited {
     display: block;
     color: whitesmoke; }
-    /* line 127, ../_assets/sass/custom/partials/_typography.scss */
+    /* line 128, ../_assets/sass/custom/partials/_typography.scss */
     address a:hover, address a:active, address a:link:hover, address a:link:active, address a:visited:hover, address a:visited:active {
       color: #36454f;
       text-decoration: none; }
@@ -9256,7 +9257,7 @@ article p {
   overflow: auto; }
 
 /* line 84, ../_assets/sass/custom/partials/_layout.scss */
-#film {
+#film, #audio {
   margin: 2em 0; }
 
 /* line 1, ../_assets/sass/custom/partials/_navigation.scss */
@@ -9344,7 +9345,7 @@ a.gallery {
   clear: both; }
 
 /* line 27, ../_assets/sass/custom/partials/_images.scss */
-#media img, #media video {
+#media img, #media video, #media audio {
   border: 1px solid whitesmoke;
   -webkit-box-shadow: 3px 3px 6px #36454f;
   -moz-box-shadow: 3px 3px 6px #36454f;
@@ -9352,13 +9353,16 @@ a.gallery {
   width: 90%;
   margin: auto;
   display: block; }
+/* line 35, ../_assets/sass/custom/partials/_images.scss */
+#media audio {
+  width: 50%; }
 
-/* line 38, ../_assets/sass/custom/partials/_images.scss */
+/* line 42, ../_assets/sass/custom/partials/_images.scss */
 .slides a {
   display: inline-block;
   margin: 0.75em;
   color: whitesmoke; }
-  /* line 43, ../_assets/sass/custom/partials/_images.scss */
+  /* line 47, ../_assets/sass/custom/partials/_images.scss */
   .slides a:hover {
     color: #36454f;
     text-decoration: none; }

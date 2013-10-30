@@ -24,12 +24,16 @@ a.gallery {
 
 #media {
         
-      img, video {
+      img, video, audio {
         border: 1px solid $whiteSmoke;
         @include box-shadow(3px 3px 6px $grayCharcoal);
         width: 90%;
         margin: auto;
         display: block;
+      }
+      
+      audio {
+            width: 50%;
       }
 }
 
