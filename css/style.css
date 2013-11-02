@@ -9128,50 +9128,52 @@ cite {
 p, address {
   font-size: 1.333333333em;
   line-height: 1.6875em;
-  font-family: HattoriHanzoLight; }
+  font-family: HattoriHanzoLight;
+  text-align: justify;
+  hyphens: auto; }
 
-/* line 84, ../_assets/sass/custom/partials/_typography.scss */
+/* line 86, ../_assets/sass/custom/partials/_typography.scss */
 small {
   font-style: italic;
   padding-left: 0.5em; }
 
-/* line 90, ../_assets/sass/custom/partials/_typography.scss */
+/* line 92, ../_assets/sass/custom/partials/_typography.scss */
 .page-header {
   padding: 0;
   border-color: #91a3b0;
   text-align: right;
   margin: 18px 0 48px; }
 
-/* line 97, ../_assets/sass/custom/partials/_typography.scss */
+/* line 99, ../_assets/sass/custom/partials/_typography.scss */
 #about h2, #about p {
   color: #91a3b0; }
 
-/* line 101, ../_assets/sass/custom/partials/_typography.scss */
+/* line 103, ../_assets/sass/custom/partials/_typography.scss */
 #intro .page-header {
   border: none; }
 
-/* line 105, ../_assets/sass/custom/partials/_typography.scss */
+/* line 107, ../_assets/sass/custom/partials/_typography.scss */
 .more-link {
   float: right;
   clear: both;
   font-style: italic;
   color: #4d5965; }
-  /* line 111, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 113, ../_assets/sass/custom/partials/_typography.scss */
   .more-link:hover, .more-link:active, .more-link:visited {
     text-decoration: none;
     color: #318ce7; }
 
-/* line 117, ../_assets/sass/custom/partials/_typography.scss */
+/* line 119, ../_assets/sass/custom/partials/_typography.scss */
 address {
   color: #5c5c5c; }
-  /* line 120, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 122, ../_assets/sass/custom/partials/_typography.scss */
   address b {
     color: #36454f; }
-  /* line 124, ../_assets/sass/custom/partials/_typography.scss */
+  /* line 126, ../_assets/sass/custom/partials/_typography.scss */
   address a, address a:link, address a:visited {
     display: block;
     color: whitesmoke; }
-    /* line 128, ../_assets/sass/custom/partials/_typography.scss */
+    /* line 130, ../_assets/sass/custom/partials/_typography.scss */
     address a:hover, address a:active, address a:link:hover, address a:link:active, address a:visited:hover, address a:visited:active {
       color: #36454f;
       text-decoration: none; }

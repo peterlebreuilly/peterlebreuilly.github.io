@@ -50,17 +50,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/photos\/headshots\/images\/altered\/DSC4866.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4866.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4866.jpg",
-      "initialSize" : 98429,
-      "fileType" : 4096
-    },
     "\/photos\/placeholder.jpg" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -70,6 +59,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/photos\/placeholder.jpg",
       "initialSize" : 17989,
+      "fileType" : 4096
+    },
+    "\/photos\/headshots\/images\/altered\/DSC4866.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4866.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4866.jpg",
+      "initialSize" : 98429,
       "fileType" : 4096
     },
     "\/_assets\/sass\/boot\/_close.scss" : {
@@ -146,18 +146,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/_assets\/sass\/boot\/_thumbnails.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_thumbnails.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_thumbnails.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
     "\/_assets\/sass\/boot\/_button-groups.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -167,6 +155,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/css\/_button-groups.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/_assets\/sass\/boot\/_thumbnails.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_thumbnails.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_thumbnails.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -356,17 +356,16 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/_assets\/sass\/boot\/_buttons.scss" : {
+    "\/photos\/productions\/placeholder.jpg" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_buttons.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_buttons.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
+      "initialSize" : 28282,
+      "fileType" : 4096
     },
     "\/photos\/headshots\/images\/DSC4895-1.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -390,16 +389,17 @@
       "initialSize" : 243272,
       "fileType" : 4096
     },
-    "\/photos\/productions\/placeholder.jpg" : {
+    "\/_assets\/sass\/boot\/_buttons.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/productions\/placeholder.jpg",
-      "initialSize" : 28282,
-      "fileType" : 4096
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_buttons.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_buttons.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/_assets\/sass\/boot\/_scaffolding.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -448,17 +448,16 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/_assets\/sass\/boot\/_modals.scss" : {
+    "\/photos\/headshots\/images\/altered\/DSC4882.jpg" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_modals.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_modals.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
+      "initialSize" : 104829,
+      "fileType" : 4096
     },
     "\/_includes\/header.html" : {
       "ignoreWasSetByUser" : 0,
@@ -466,6 +465,15 @@
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/_includes\/header.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/media.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/media.html",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
@@ -493,25 +501,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/media.html" : {
+    "\/_assets\/sass\/boot\/_modals.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/media.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/photos\/headshots\/images\/altered\/DSC4882.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/headshots\/images\/altered\/DSC4882.jpg",
-      "initialSize" : 104829,
-      "fileType" : 4096
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_modals.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_modals.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/photos\/productions\/images\/thumbs\/27db0414290681c5a0dff696f2fcf7e2.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -684,6 +684,18 @@
       "initialSize" : 146905,
       "fileType" : 4096
     },
+    "\/_assets\/sass\/boot\/_tables.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_tables.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_tables.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
     "\/css\/refineslide.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -692,18 +704,6 @@
       "inputAbbreviatedPath" : "\/css\/refineslide.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
-    },
-    "\/_assets\/sass\/cms\/_color-me-sass.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/cms\/_color-me-sass.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_color-me-sass.css",
-      "fileType" : 4,
-      "debugStyle" : 0
     },
     "\/img\/stare(cropped).png" : {
       "ignoreWasSetByUser" : 0,
@@ -738,17 +738,6 @@
       "outputAbbreviatedPath" : "\/css\/_tooltip.css",
       "fileType" : 4,
       "debugStyle" : 0
-    },
-    "\/apple-touch-icon-120x120.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/apple-touch-icon-120x120.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/apple-touch-icon-120x120.png",
-      "initialSize" : 23846,
-      "fileType" : 8192
     },
     "\/_assets\/sass\/boot\/_component-animations.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -785,6 +774,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/apple-touch-icon-120x120.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/apple-touch-icon-120x120.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/apple-touch-icon-120x120.png",
+      "initialSize" : 23846,
+      "fileType" : 8192
+    },
     "\/_assets\/sass\/cms\/colors\/_whites.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -794,6 +794,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/css\/_whites.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/_assets\/sass\/cms\/_color-me-sass.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/cms\/_color-me-sass.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_color-me-sass.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -807,18 +819,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/minified\/jquery.localScroll.min-ck.js",
       "fileType" : 64
-    },
-    "\/_assets\/sass\/boot\/_tables.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_tables.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_tables.css",
-      "fileType" : 4,
-      "debugStyle" : 0
     },
     "\/_assets\/sass\/boot\/responsive.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1124,40 +1124,6 @@
       "initialSize" : 159321,
       "fileType" : 4096
     },
-    "\/photos\/DSC4866.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
-      "initialSize" : 98429,
-      "fileType" : 4096
-    },
-    "\/photos\/DSC4856.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/photos\/DSC4856.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/photos\/DSC4856.jpg",
-      "initialSize" : 134751,
-      "fileType" : 4096
-    },
-    "\/_assets\/sass\/boot\/_navbar.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_navbar.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_navbar.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
     "\/_assets\/sass\/boot\/_layouts.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1170,6 +1136,28 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/photos\/DSC4856.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/photos\/DSC4856.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/photos\/DSC4856.jpg",
+      "initialSize" : 134751,
+      "fileType" : 4096
+    },
+    "\/photos\/DSC4866.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/photos\/DSC4866.jpg",
+      "initialSize" : 98429,
+      "fileType" : 4096
+    },
     "\/_assets\/sass\/boot\/_alerts.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1179,6 +1167,30 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/css\/_alerts.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/_assets\/sass\/boot\/_sprites.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_sprites.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_sprites.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/_assets\/sass\/boot\/_breadcrumbs.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_breadcrumbs.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/css\/_breadcrumbs.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -1193,27 +1205,15 @@
       "outputAbbreviatedPath" : "\/js\/minified\/jquery.refineslide-ck.js",
       "fileType" : 64
     },
-    "\/_assets\/sass\/boot\/_breadcrumbs.scss" : {
+    "\/_assets\/sass\/boot\/_navbar.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_breadcrumbs.scss",
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_navbar.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_breadcrumbs.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/_assets\/sass\/boot\/_sprites.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_sprites.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_sprites.css",
+      "outputAbbreviatedPath" : "\/css\/_navbar.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -1398,6 +1398,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/_includes\/footer.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/_includes\/footer.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/js\/minified\/jquery.min-ck.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1408,15 +1417,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/minified\/jquery.min-ck-ck.js",
       "fileType" : 64
-    },
-    "\/_includes\/footer.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_includes\/footer.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/photos\/headshots\/images\/altered\/DSC4895-1.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -1429,15 +1429,15 @@
       "initialSize" : 113599,
       "fileType" : 4096
     },
-    "\/_assets\/sass\/boot\/_hero-unit.scss" : {
+    "\/_assets\/sass\/cms\/colors\/_blues.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_hero-unit.scss",
+      "inputAbbreviatedPath" : "\/_assets\/sass\/cms\/colors\/_blues.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_hero-unit.css",
+      "outputAbbreviatedPath" : "\/css\/_blues.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -1453,15 +1453,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/_assets\/sass\/cms\/colors\/_blues.scss" : {
+    "\/_assets\/sass\/boot\/_hero-unit.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/_assets\/sass\/cms\/colors\/_blues.scss",
+      "inputAbbreviatedPath" : "\/_assets\/sass\/boot\/_hero-unit.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/css\/_blues.css",
+      "outputAbbreviatedPath" : "\/css\/_hero-unit.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
