@@ -2,3 +2,5 @@
 .project
 .sass-cache
 .komodoproject
+.json
+.xml
